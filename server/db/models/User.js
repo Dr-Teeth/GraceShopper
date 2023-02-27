@@ -13,10 +13,32 @@ const User = db.define('user', {
   },
   password: {
     type: Sequelize.STRING,
+  },
+  email: {
+    type: Sequelize.STRING,
+    unique: true,
+    allowNull: false,
+    validate: {
+      isEmail: true
+    }
+  },
+  address: {
+    type: Sequelize.STRING
+  },
+  phone: {
+    type: Sequelize.BIGINT
+  },
+  firstN: {
+    type: Sequelize.STRING
+  },
+  lastN: {
+    type: Sequelize.STRING
+  },
+  isAdmin: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
   }
 })
-
-module.exports = User
 
 /**
  * instanceMethods
