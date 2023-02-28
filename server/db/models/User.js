@@ -4,7 +4,6 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt');
 
 const SALT_ROUNDS = 5;
-
 const User = db.define('user', {
   username: {
     type: Sequelize.STRING,
@@ -93,3 +92,5 @@ const hashPassword = async(user) => {
 User.beforeCreate(hashPassword)
 User.beforeUpdate(hashPassword)
 User.beforeBulkCreate(users => Promise.all(users.map(hashPassword)))
+
+module.exports = User;
