@@ -2,7 +2,7 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 
-const Products = db.define('products', {
+ const Products = db.define('products', {
   name: {
     type: Sequelize.STRING,
     allowNull: false
@@ -15,7 +15,8 @@ const Products = db.define('products', {
     type: Sequelize.BIGINT
   },
   quantity: {
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
+    defaultValue: 0
   },
   imageUrl: {
     type: Sequelize.STRING,
