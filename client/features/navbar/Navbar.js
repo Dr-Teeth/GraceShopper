@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../../app/store';
+import { useParams } from 'react-router-dom';
 
 const Navbar = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
@@ -12,6 +13,8 @@ const Navbar = () => {
     navigate('/login');
   };
 
+  const {id} = useParams()
+
   return (
     <div>
       <h1>FS-App-Template</h1>
@@ -20,6 +23,7 @@ const Navbar = () => {
           <div>
             {/* The navbar will show these links after you log in */}
             <Link to="/home">Home</Link>
+            <Link to={`/editUser/:id`}>Edit User</Link>
             <button type="button" onClick={logoutAndRedirectHome}>
               Logout
             </button>
