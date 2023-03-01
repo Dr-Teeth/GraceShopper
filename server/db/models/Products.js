@@ -8,7 +8,7 @@ const db = require('../db')
     allowNull: false
   },
   description: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
     allowNull: false
   },
   price: {
