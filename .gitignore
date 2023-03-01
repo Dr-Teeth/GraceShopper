@@ -1,3 +1,7 @@
 node_modules
 **/bundle.js
+<<<<<<< HEAD
 **/*.map.js
+=======
+**/*.map.js
+>>>>>>> 81c1d2c7b09eb27c1fc7fc3554388f3f2a1ce74f
