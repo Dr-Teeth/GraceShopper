@@ -2,11 +2,15 @@ import { configureStore } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
 import authReducer from '../features/auth/authSlice';
 import editUserSlice from '../features/editUser/editUserSlice';
+import cartReducer from '../features/cart/cartSlice';
 
 const store = configureStore({
-  reducer: { auth: authReducer },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
-  editUser: editUserSlice
+  reducer: {
+    auth: authReducer,
+    editUser: editUserSlice,
+    cart: cartReducer // <-- add cart reducer here
+  },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger)
 });
 
 export default store;
