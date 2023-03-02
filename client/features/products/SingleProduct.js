@@ -1,34 +1,43 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchSingleProduct, editProductAsync, selectSingleProduct } from './SingleProductSlice';
+import SingleProductSlice, { fetchSingleProduct, editProductAsync } from './SingleProductSlice';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
 const SingleProduct = (props) => {
+  const name = props.match.params.name;
+
+  const [itemId, setId] = useState(Infinity);
+
   const dispatch = useDispatch();
-  const { id } = useParams();
-  const product = useSelector(selectSingleProduct);
+
+  const SingleProduct = SingleProductSlice || [];
+  const { vanName, description, imageUrl, price } = SingleProduct[0] || [];
+
+  useEffect(() => {
+    dispatch(_fetchSingleStyle(name));
+  }, []);
 
   return (
     <div className="divBelowNavbar">
       <div className="row ">
-        <div className="column single-shoe">
+        <div className="column single-product">
           <img src={imageUrl} />
         </div>
         <div className="column">
           <div className="row">
             {' '}
-            <h1>{Name}</h1>{' '}
+            <h1>{vanName}</h1>{' '}
           </div>
 
           <div className="row">
             {' '}
-            <h3>{brand}</h3>
+            <h3>{description}</h3>
           </div>
           <div className="row">
             <h3>
               {'$'}
-              {price}
+              {price}.00
             </h3>
           </div>
           <div className="row">
@@ -38,7 +47,6 @@ const SingleProduct = (props) => {
             {SingleProduct.map((element) => (
               <button
                 key={element.id}
-                className="shoe-sizes"
                 onClick={() => {
                   setId(`${element.id}`);
                 }}
@@ -49,7 +57,6 @@ const SingleProduct = (props) => {
           </div>
           <div className="row">
             <button
-              className="button-50"
               onClick={() => {
                 if (itemId !== Infinity) {
                   dispatch(findOrMakeCart(itemId, userId, UUID));
@@ -66,4 +73,4 @@ const SingleProduct = (props) => {
   );
 };
 
-export default SingleStyle;
+export default SingleProduct;
