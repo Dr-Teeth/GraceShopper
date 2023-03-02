@@ -26,9 +26,18 @@ const AppRoutes = () => {
       {isLoggedIn ? (
         <Routes>
           <Route path="/*" element={<Home />} />
+<<<<<<< HEAD
+          <Route to="/home" element={<Home />} />
+          <Route path="/vans" element={<AllProducts />} />
+=======
           <Route path="/home" element={<Home />} />
+<<<<<<< HEAD
           <Route path={`/users/:id`} element={<SingleUser id={id} />} />
           <Route path={`/editUser/:id`} element={<EditUser id={id} />} />
+=======
+          <Route path={`/editUser`} element={<EditUser />} />
+>>>>>>> 81c1d2c7b09eb27c1fc7fc3554388f3f2a1ce74f
+>>>>>>> main
         </Routes>
       ) : (
         <Routes>
