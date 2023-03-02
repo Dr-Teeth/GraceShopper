@@ -27,16 +27,11 @@ const AppRoutes = () => {
       {isLoggedIn ? (
         <Routes>
           <Route path="/*" element={<Home />} />
-<<<<<<< HEAD
           <Route to="/home" element={<Home />} />
           <Route path="/vans" element={<AllProducts />} />
-=======
           <Route path="/home" element={<Home />} />
-<<<<<<< HEAD
           <Route path={`/users/:id`} element={<SingleUser id={id} />} />
           <Route path={`/editUser/:id`} element={<EditUser id={id} />} />
-=======
-          <Route path={`/editUser`} element={<EditUser />} />
         </Routes>
       ) : (
         <Routes>
