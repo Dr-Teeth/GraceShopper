@@ -4,22 +4,22 @@ import axios from "axios";
 
 export const editUserAsync = createAsyncThunk(
   "editUser/editUserAsync",
-  async ({ id, fName, lName, address, phone }) => {
+  async ({ id, firstN, lastN, address, phone }) => {
     try {
-      const { data } = await axios.put(`/api//${id}`, {
-        fName: fName,
-        lName: lName,
+      const { data } = await axios.put(`/editUser/${id}`, {
+        firstN: firstN,
+        lastN: lastN,
         address: address,
         phone: phone
       });
       return data;
     } catch (error) {
-      console.log(error.message)
+      throw error
     }
   }
 );
 
-const userSlice = createSlice({
+const editUserSlice = createSlice({
   name: "user",
   initialState: [],
   reducers: {},
@@ -33,4 +33,4 @@ const userSlice = createSlice({
 
 export const selectUser = (state) => state.user
 
-export default userSlice.reducer;
+export default editUserSlice.reducer;

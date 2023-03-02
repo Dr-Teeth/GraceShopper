@@ -33,14 +33,3 @@ router.get('/me', async (req, res, next) => {
   }
 });
 
-  router.put('/:id', async (req, res, next) => {
-    try {
-      await User.update(req.body, {
-        where: {
-          id: req.params.id
-        }
-      })
-    } catch (error) {
-      next(error);
-    }
-  });
