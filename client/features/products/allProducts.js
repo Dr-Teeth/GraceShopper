@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchProductsAsync } from './AllProductsSlice';
 
@@ -6,8 +6,6 @@ import { Link, useLocation } from 'react-router-dom';
 
 const AllProducts = () => {
   const location = useLocation()
-  const [van, setVan] = useState('All')
-  const [color, setColor] = useState('All')
 
   const products =
     useSelector((state) => {
@@ -19,13 +17,13 @@ const AllProducts = () => {
   useEffect(() => {
     dispatch(fetchProductsAsync());
     if (location.state) {
-      setVan(location.state.brand)
+      setVan(location.state.van)
     }
   }, []);
 
 
   return (
-    <div className="divBelowNavbar">
+    <div>
       <form>
         <label>Filter Vans:</label>
         <select onChange={(event) => setVan(event.target.value)}>
@@ -35,17 +33,20 @@ const AllProducts = () => {
           <option value="Home">Home</option>
         </select>
       </form>
-      <form>
-        <label>Filter Color:</label>
-        <select onChange={(event) => setColor(event.target.value)}>
-          <option value="All">All</option>
-          <option value="white">White</option>
-          <option value="black">Black</option>
-          <option value="red">Red</option>
-          <option value="green">Green</option>
-          <option value="blue">Blue</option>
-        </select>
-      </form>
+      <div>
+        {products.map((van, idx) => (
+          <div className="card" key={idx}>
+            <Link to={`/vans/${products.name}`}>
+              <img src={van.imageUrl} className="" />
+              <h2>{van.name}</h2>
+            </Link>
+            <h2>
+              {'$'}
+              {van.price}
+            </h2>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

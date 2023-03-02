@@ -8,6 +8,7 @@ import EditUser from '../features/editUser/EditUser';
 import Home from '../features/home/Home';
 import AllProducts from '../features/products/allProducts';
 import { me } from './store';
+import Cart from '../features/cart/Cart';
 
 const AppRoutes = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
@@ -36,8 +37,6 @@ const AppRoutes = () => {
           <Route path={`/editUser/:id`} element={<EditUser id={id} />} />
 =======
           <Route path={`/editUser`} element={<EditUser />} />
->>>>>>> 81c1d2c7b09eb27c1fc7fc3554388f3f2a1ce74f
->>>>>>> main
         </Routes>
       ) : (
         <Routes>
@@ -53,6 +52,7 @@ const AppRoutes = () => {
             path="/signup"
             element={<AuthForm name="signup" displayName="Sign Up" />}
           />
+          <Route path={`/cart`} element={<Cart />} />
           <Route path="/me" element={<AuthForm name="me" />} />
           <Route path="/vans" element={<AllProducts />}/>
         </Routes>
