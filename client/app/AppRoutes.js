@@ -6,7 +6,7 @@ import SingleUser from '../features/userPage/SingleUser';
 import { fetchSingleUser } from '../features/userPage/userPageSlice';
 import EditUser from '../features/editUser/EditUser';
 import Home from '../features/home/Home';
-import AllProducts from '../features/products/allProducts';
+import AllProducts from '../features/products/AllProducts'; // <-- import from correct file path
 import { me } from './store';
 import Cart from '../features/cart/Cart';
 
@@ -48,8 +48,7 @@ const AppRoutes = () => {
             element={<AuthForm name="signup" displayName="Sign Up" />}
           />
           <Route path={`/cart`} element={<Cart />} />
-          <Route path="/me" element={<AuthForm name="me" />} />
-          <Route path="/vans" element={<AllProducts />}/>
+          <Route path="/vans" element={<AllProducts />} />
         </Routes>
       )}
     </div>
