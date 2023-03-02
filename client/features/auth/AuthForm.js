@@ -44,14 +44,13 @@ const AuthForm = ({ name, displayName }) => {
           required
           />
         </div>
-        <div>
+        <div className={displayName == "Sign Up" ? "show" : "hide"}>
           <label htmlFor="email">
             <small>Email</small>
           </label>
           <input
           name="email"
           type="email"
-
           />
         </div>
         <div>
