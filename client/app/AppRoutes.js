@@ -1,33 +1,37 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useParams } from 'react-router-dom';
 import AuthForm from '../features/auth/AuthForm';
-import EditUser from '../features/editUser/EditUser'
+import SingleUser from '../features/userPage/SingleUser';
+import { fetchSingleUser } from '../features/userPage/userPageSlice';
+import EditUser from '../features/editUser/EditUser';
 import Home from '../features/home/Home';
 import AllProducts from '../features/products/AllProducts'; // <-- import from correct file path
 import { me } from './store';
 import Cart from '../features/cart/Cart';
 
-/**
- * COMPONENT
- */
-
 const AppRoutes = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const dispatch = useDispatch();
+  const { id } = useParams();
 
   useEffect(() => {
     dispatch(me());
-  }, []);
+    if (id) {
+      dispatch(fetchSingleUser(id));
+    }
+  }, [dispatch, id]);
 
   return (
     <div>
       {isLoggedIn ? (
         <Routes>
           <Route path="/*" element={<Home />} />
+          <Route to="/home" element={<Home />} />
+          <Route path="/vans" element={<AllProducts />} />
           <Route path="/home" element={<Home />} />
-          <Route path={`/editUser`} element={<EditUser />} />
-          <Route path={`/cart`} element={<Cart />} />
+          <Route path={`/users/:id`} element={<SingleUser id={id} />} />
+          <Route path={`/editUser/:id`} element={<EditUser id={id} />} />
         </Routes>
       ) : (
         <Routes>

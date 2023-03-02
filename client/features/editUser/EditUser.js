@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { editUserAsync } from '../editUser/editUserSlice'
 import { useNavigate, useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-
+import { useDispatch, useSelector } from 'react-redux';
 
 const EditUser = () => {
-  const [fName, editFName] = useState("");
-  const [lName, editLName] = useState("");
+  const [firstN, editFName] = useState("");
+  const [lastN, editLName] = useState("");
   const [address, editAddress] = useState("");
   const [phone, editPhone] = useState("");
+
+  const auth = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -16,27 +17,27 @@ const EditUser = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(editUserAsync({ fName, lName, address, phone, id}));
+    dispatch(editUserAsync({ id, firstN, lastN, address, phone }));
     alert("User profile has been updated!")
-    navigate("/home");
+    navigate(`/users/${auth.me.id}`);
   };
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="fName">First Name: </label>
+        <label htmlFor="firstN">First Name: </label>
           <input
-          name="fName"
+          name="firstN"
           placeholder='First Name...'
-          value={fName}
+          value={firstN}
           onChange={(e) => editFName(e.target.value)}
         />
 
-        <label htmlFor="lName">Last Name: </label>
+        <label htmlFor="lastN">Last Name: </label>
         <input
-          name="lName"
+          name="lastN"
           placeholder='Last Name...'
-          value={lName}
+          value={lastN}
           onChange={(e) => editLName(e.target.value)}
         />
 
@@ -55,7 +56,7 @@ const EditUser = () => {
           value={phone}
           onChange={(e) => editPhone(e.target.value)}
         />
-        <button className="formButton" type='submit'>Submit Changes</button>
+        <button type='submit' disabled={!firstN && !lastN && !phone && !address ? true : false}>Save Changes</button>
       </form>
     </div>
   )

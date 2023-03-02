@@ -25,7 +25,7 @@ const User = db.define('user', {
     type: Sequelize.STRING
   },
   phone: {
-    type: Sequelize.BIGINT
+    type: Sequelize.STRING
   },
   firstN: {
     type: Sequelize.STRING
