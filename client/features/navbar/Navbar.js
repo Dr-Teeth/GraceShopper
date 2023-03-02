@@ -23,29 +23,9 @@ const Navbar = () => {
       <nav className="right">
   {isLoggedIn ? (
     <div>
-      <h1>FS-App-Template</h1>
-      <nav>
-        {isLoggedIn ? (
-          <div>
-            {/* The navbar will show these links after you log in */}
-            <Link to="/home">Home</Link>
-            <Link to={`/users/${auth.me.id}`}>My Profile</Link>
-            <button type="button" onClick={logoutAndRedirectHome}>
-              Logout
-            </button>
-          </div>
-        ) : (
-          <div>
-            {/* The navbar will show these links before you log in */}
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Sign Up</Link>
-          </div>
-        )}
-      </nav>
-      <hr />
       {/* The navbar will show these links after you log in */}
       <Link to="/home">Home</Link>
-      <Link to={`/editUser`}>Edit User</Link>
+      <Link to={`/users/${auth.me.id}`}>My Profile</Link>
       <button type="button" onClick={logoutAndRedirectHome}>
         Logout
       </button>
@@ -68,5 +48,9 @@ const Navbar = () => {
     </div>
   );
 };
-
 export default Navbar;
+
+
+
+
+

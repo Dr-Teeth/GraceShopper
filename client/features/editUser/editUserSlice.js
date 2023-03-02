@@ -6,13 +6,12 @@ export const editUserAsync = createAsyncThunk(
   "editUser/editUserAsync",
   async ({ id, firstN, lastN, address, phone }) => {
     try {
-      const { data } = await axios.put(`/editUser/${id}`, {
-        firstN: firstN,
-        lastN: lastN,
-        address: address,
-        phone: phone
+      const response = await axios.put(`/api/users/${id}`, { firstN, lastN, address, phone }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
       });
-      return data;
+      return response.data;
     } catch (error) {
       throw error
     }
