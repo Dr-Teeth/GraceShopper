@@ -85,9 +85,7 @@ async function seed() {
       chris: users[2],
       ryan: users[3]
     },
-    products: {
-      products
-    }
+    products
   }
 }
 
