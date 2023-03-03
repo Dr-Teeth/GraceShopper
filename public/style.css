@@ -27,3 +27,8 @@ form div {
 .hide {
   display: none;
 }
+
+.van-img {
+  width: 30vw;
+  height: auto;
+}
