@@ -18,16 +18,20 @@ const AllProducts = () => {
     return <div>{error}</div>;
   }
 
+  if (products.length === 0) {
+    return <div>No products found</div>;
+  }
+
   return (
     <div>
       <h1>All Products</h1>
-      {products.map((product, index) => (
-  <div key={index}>
-    <h2>{product.name}</h2>
-    <img src={product.imgUrl} />
-    <p>Price: ${product.price}</p>
-  </div>
-))}
+      {products.map((product) => (
+        <div key={product.id}>
+          <h2>{product.name}</h2>
+          <p>{product.description}</p>
+          <p>Price: ${product.price}</p>
+        </div>
+      ))}
     </div>
   );
 };
