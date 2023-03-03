@@ -33,7 +33,7 @@ const AllProducts = () => {
       {products.map((product) => (
         <div key={product.id}>
           <h2>{product.name}</h2>
-          <img src={product.imgUrl} alt={product.name} />
+          <img src={product.imageUrl} alt={product.name} />
           <p>Price: ${product.price}</p>
           <button onClick={() => handleAddToCart(product.id, product.name, product.price)}>Add to Cart</button>
         </div>
