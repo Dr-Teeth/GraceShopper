@@ -32,6 +32,7 @@ const AppRoutes = () => {
           <Route path="/home" element={<Home />} />
           <Route path={`/users/:id`} element={<SingleUser id={id} />} />
           <Route path={`/editUser/:id`} element={<EditUser id={id} />} />
+          <Route path={`/cart`} element={<Cart />} />
         </Routes>
       ) : (
         <Routes>

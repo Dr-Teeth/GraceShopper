@@ -14,10 +14,10 @@ const SingleUser = () => {
     dispatch(fetchSingleUser(id));
   }, [dispatch, id]);
 
-  const requestStatus = useSelector((state) => state.singleUser.requestStatus);
-
   const {firstN, lastN, address, phone, email} = user ? user : {}
 
+  const requestStatus = useSelector((state) => state.singleUser.requestStatus);
+  
   if (requestStatus === 'pending') {
         return <div>Loading...</div>;
       }
