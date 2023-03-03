@@ -7,11 +7,13 @@ import { fetchSingleUser } from '../features/userPage/userPageSlice';
 import EditUser from '../features/editUser/EditUser';
 import Home from '../features/home/Home';
 import AllProducts from '../features/products/AllProducts';
+import Admin from '../features/admin/Admin'
 import { me } from './store';
 import Cart from '../features/cart/Cart';
 
 const AppRoutes = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
+  const isAdmin = useSelector((state) => state.auth.me.isAdmin);
   const dispatch = useDispatch();
   const { id } = useParams();
 
@@ -23,37 +25,29 @@ const AppRoutes = () => {
   }, [dispatch, id]);
 
   return (
-    <div>
-      {isLoggedIn ? (
-        <Routes>
-          <Route path="/*" element={<Home />} />
-          <Route to="/home" element={<Home />} />
-          <Route path="/vans" element={<AllProducts />} />
+    <Routes>
+      {isAdmin && <Route path="/dashboard" element={<Admin />} />}
+      {isLoggedIn && (
+        <>
+          <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/vans" element={<AllProducts />} />
           <Route path={`/users/:id`} element={<SingleUser id={id} />} />
           <Route path={`/editUser/:id`} element={<EditUser id={id} />} />
           <Route path={`/cart`} element={<Cart />} />
-        </Routes>
-      ) : (
-        <Routes>
-          <Route
-            path="/*"
-            element={<AuthForm name="login" displayName="Login" />}
-          />
-          <Route
-            path="/login"
-            element={<AuthForm name="login" displayName="Login" />}
-          />
-          <Route
-            path="/signup"
-            element={<AuthForm name="signup" displayName="Sign Up" />}
-          />
+        </>
+      )}
+      {!isLoggedIn && (
+        <>
+          <Route path="/login" element={<AuthForm name="login" displayName="Login" />} />
+          <Route path="/signup" element={<AuthForm name="signup" displayName="Sign Up" />} />
           <Route path={`/cart`} element={<Cart />} />
           <Route path="/vans" element={<AllProducts />} />
-        </Routes>
+        </>
       )}
-    </div>
+    </Routes>
   );
+
 };
 
 export default AppRoutes;
