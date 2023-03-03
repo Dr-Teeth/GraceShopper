@@ -6,7 +6,7 @@ import SingleUser from '../features/userPage/SingleUser';
 import { fetchSingleUser } from '../features/userPage/userPageSlice';
 import EditUser from '../features/editUser/EditUser';
 import Home from '../features/home/Home';
-import AllProducts from '../features/products/AllProducts'; // <-- import from correct file path
+import AllProducts from '../features/products/AllProducts';
 import { me } from './store';
 import Cart from '../features/cart/Cart';
 
