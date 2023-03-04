@@ -14,7 +14,7 @@ const store = configureStore({
     singleUser: singleUserSlice,
     cart: cartReducer, 
     allProducts: allProductsReducer,
-    SingleProductSlice: SingleProductSlice
+    SingleProduct: SingleProductSlice
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger)
 });
