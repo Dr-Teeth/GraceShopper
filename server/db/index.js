@@ -2,21 +2,21 @@ const db = require('./db')
 
 const User = require('./models/User');
 const Products = require('./models/Products');
-const OrderHistory = require('./models/OrderHistory');
+const Order = require('./models/Order');
 
 // Define associations
-User.hasMany(OrderHistory);
-OrderHistory.belongsTo(User);
+User.hasMany(Order);
+Order.belongsTo(User);
 
-// User.belongsToMany(Products, { through: 'carts' });
-Products.belongsToMany(User, { through: { model: 'User', unique: false, foreignKey: 'carts' } });
-
+// Products and Orders have a many-to-many relationship
+Products.belongsToMany(Order, { through: 'OrderProduct' });
+Order.belongsToMany(Products, { through: 'OrderProduct' });
 
 module.exports = {
   db,
   models: {
     User,
     Products,
-    OrderHistory,
+    Order,
   },
 }
