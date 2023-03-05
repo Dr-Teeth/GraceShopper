@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchProductsAsync, selectAllProducts } from './AllProductsSlice';
 import { Link } from 'react-router-dom'
 import { addOrder } from '../dataSlice';
+import { Link, useNavigate } from 'react-router-dom';
 
 const AllProducts = () => {
   const dispatch = useDispatch();
@@ -44,17 +45,22 @@ const AllProducts = () => {
           dispatch(addOrder(data));
         })
         .catch((error) => console.error(error));
+    } else {
+      const order = { productName: name, productPrice: price, quantity: 1 };
+      const existingOrders = JSON.parse(localStorage.getItem('orders')) || [];
+      localStorage.setItem('orders', JSON.stringify([...existingOrders, order]));
     }
   };
-
   return (
     <div>
       <h1>All Products</h1>
       {products.map((product) => (
         <div key={product.id}>
-          <Link to={`/vans/${product.id}`}><h2>{product.name}</h2></Link>
-          <img src={product.imageUrl} alt={product.name} />
-          <p>Price: ${product.price}</p>
+          <Link to={`/vans/${product.id}`}>
+            <h2>{product.name}</h2>
+            <img src={product.imageUrl} alt={product.name} />
+            <p>Price: ${product.price}</p>
+          </Link>
           <button onClick={() => handleAddToCart(product.id, product.name, product.price, userId)}>Add to Cart</button>
         </div>
       ))}
