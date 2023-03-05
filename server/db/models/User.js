@@ -33,11 +33,6 @@ const User = db.define('user', {
   lastN: {
     type: Sequelize.STRING
   },
-  carts: {
-    type: Sequelize.ARRAY(Sequelize.JSONB),
-    defaultValue: [],
-    allowNull: false,
-  },
   isAdmin: {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
