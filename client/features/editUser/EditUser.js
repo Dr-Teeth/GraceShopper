@@ -18,8 +18,8 @@ const EditUser = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const updatedFields = {};
-    if (firstN) updatedFields.firstName = firstN;
-    if (lastN) updatedFields.lastName = lastN;
+    if (firstN) updatedFields.firstN = firstN;
+    if (lastN) updatedFields.lastN = lastN;
     if (address) updatedFields.address = address;
     if (phone) updatedFields.phone = phone;
     dispatch(editUserAsync({ id, ...updatedFields }));

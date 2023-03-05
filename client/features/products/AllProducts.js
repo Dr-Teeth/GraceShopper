@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchProductsAsync, selectAllProducts } from './AllProductsSlice';
+import { Link } from 'react-router-dom'
 import { addOrder } from '../dataSlice';
 
 const AllProducts = () => {
@@ -45,18 +46,13 @@ const AllProducts = () => {
         .catch((error) => console.error(error));
     }
   };
-  
-  
-  
-  
-  
 
   return (
     <div>
       <h1>All Products</h1>
       {products.map((product) => (
         <div key={product.id}>
-          <h2>{product.name}</h2>
+          <Link to={`/vans/${product.id}`}><h2>{product.name}</h2></Link>
           <img src={product.imageUrl} alt={product.name} />
           <p>Price: ${product.price}</p>
           <button onClick={() => handleAddToCart(product.id, product.name, product.price, userId)}>Add to Cart</button>
