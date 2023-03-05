@@ -13,6 +13,7 @@ import EditProductAdmin from '../features/admin/EditProductAdmin';
 import EditUserAdmin from '../features/admin/EditUserAdmin';
 import AddProductAdmin from '../features/admin/AddProductAdmin'
 import { me } from './store';
+import OrderList from '../features/OrderList/OrderList';
 
 const AppRoutes = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
@@ -41,6 +42,7 @@ const AppRoutes = () => {
           <Route path="/vans/:id" element={<SingleProduct />} />
           <Route path={`/users/:id`} element={<SingleUser id={id} />} />
           <Route path={`/editUser/:id`} element={<EditUser id={id} />} />
+          <Route path="/orders" element={<OrderList userId={id} />} />
         </>
       )}
       {!isLoggedIn && (
@@ -49,6 +51,7 @@ const AppRoutes = () => {
           <Route path="/signup" element={<AuthForm name="signup" displayName="Sign Up" />} />
           <Route path="/vans" element={<AllProducts />} />
           <Route path="/vans/:id" element={<SingleProduct />} />
+          <Route path="/orders" element={<OrderList userId={id} />} />
         </>
       )}
     </Routes>

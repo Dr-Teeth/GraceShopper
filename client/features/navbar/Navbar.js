@@ -34,7 +34,7 @@ const Navbar = () => {
             <button type="button" onClick={logoutAndRedirectHome}>
               Logout
             </button>
-            <Link to="/cart">
+            <Link to="/orders">
               <ShoppingCart size={32} />
             </Link>
           </div>
@@ -44,7 +44,7 @@ const Navbar = () => {
             <Link to="/vans">All Vans</Link>
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>
-            <Link to="/cart">
+            <Link to="/orders">
               <ShoppingCart size={32} />
             </Link>
           </div>
