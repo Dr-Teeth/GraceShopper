@@ -7,6 +7,7 @@ import { fetchSingleUser } from '../features/userPage/userPageSlice';
 import EditUser from '../features/editUser/EditUser';
 import Home from '../features/home/Home';
 import AllProducts from '../features/products/AllProducts';
+import SingleProduct from '../features/products/SingleProduct';
 import Admin from '../features/admin/Admin'
 import EditProductAdmin from '../features/admin/EditProductAdmin';
 import EditUserAdmin from '../features/admin/EditUserAdmin';

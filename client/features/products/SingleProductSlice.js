@@ -1,55 +1,38 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const initialState = {};
-
 export const fetchSingleProduct = createAsyncThunk(
-  "singleProduct",
-  async (id) => {
+  "SingleProduct/fetchSingleProduct",
+  async (id, thunkAPI) => {
     try {
-      const { data } = await axios.get(`/api/vans/${id}`);
-      return data;
+      const response = await axios.get(`/api/products/${id}`);
+      return response.data;
     } catch (error) {
-      console.log(error);
+      return thunkAPI.rejectWithValue(error.response.data);
     }
   }
 );
 
-export const editProductAsync = createAsyncThunk(
-  "editProduct",
-  async ({ id, name, description, price, imageUrl, quantity }) => {
-    const { data } = await axios.put(`/api/vans/${id}`, {
-      name,
-      description,
-      price,
-      imageUrl,
-      quantity,
-    });
-    return data;
-  }
-);
-
-const singleProductSlice = createSlice({
-  name: "singleProduct",
-  initialState,
+const SingleProductSlice = createSlice({
+  name: "SingleProduct",
+  initialState: { product: null, status: 'idle', error: null },
   reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(fetchSingleProduct.fulfilled, (state, action) => {
-      return action.payload;
-    });
-    builder.addCase(editProductAsync.fulfilled, (state, action) => {
-      state.name = action.payload.name;
-      state.description = action.payload.description;
-      state.price = action.payload.price;
-      state.imageUrl = action.payload.imageUrl;
-      state.quantity = action.payload.quantity;
-    });
+  extraReducers: {
+    [fetchSingleProduct.pending]: (state) => {
+      state.status = 'loading';
+    },
+    [fetchSingleProduct.fulfilled]: (state, action) => {
+      state.status = 'succeeded';
+      state.product = action.payload;
+    },
+    [fetchSingleProduct.rejected]: (state, action) => {
+      state.status = 'failed';
+      state.error = action.payload;
+    },
   },
-  
 });
 
-export const selectSingleProduct = (state) => {
-  return state.singleProduct;
-};
+export const selectSingleProduct = state => state.SingleProduct.product;
 
-export default singleProductSlice.reducer;
+
+export default SingleProductSlice.reducer;
