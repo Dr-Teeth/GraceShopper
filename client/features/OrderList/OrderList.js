@@ -1,37 +1,45 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import axios from 'axios';
 
 const OrderList = () => {
   const [orders, setOrders] = useState([]);
   const loggedInUserId = useSelector(state => state.auth.me.id);
+  const firstN = useSelector((state) => state.auth.me.firstN);
 
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get(`/api/orders`);
-        setOrders(response.data.filter(order => order.userId === loggedInUserId));
+        const response = await fetch('/api/orders');
+        const ordersFromServer = await response.json();
+        const localOrders = JSON.parse(localStorage.getItem('orders')) || [];
+        setOrders([...ordersFromServer.filter(order => order.userId === loggedInUserId), ...localOrders]);
       } catch (error) {
         console.error(error);
       }
     };
     fetchOrders();
-  }, []);
+  }, [loggedInUserId]);
 
-  if (!loggedInUserId) {
-    return <h3>No user</h3>;
-  }
+  const handleEmptyCart = () => {
+    localStorage.removeItem('orders');
+    setOrders([]);
+  };
+
+  const cartTitle = loggedInUserId ? `${firstN}'s Orders` : "Guest's cart";
 
   return (
     <div>
-      <h2>My Orders</h2>
+      <h2>{cartTitle}</h2>
       <ul>
-        {orders.map((order) => (
-          <li key={order.id}>
+        {orders.map((order, index) => (
+          <li key={index}>
             {order.productName} - ${order.productPrice} - Quantity: {order.quantity}
           </li>
         ))}
       </ul>
+      {orders.length > 0 && (
+        <button onClick={handleEmptyCart}>Empty Cart</button>
+      )}
     </div>
   );
 };

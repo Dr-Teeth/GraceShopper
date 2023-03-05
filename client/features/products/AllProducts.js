@@ -44,8 +44,15 @@ const AllProducts = () => {
           dispatch(addOrder(data));
         })
         .catch((error) => console.error(error));
+    } else {
+      const order = { productName: name, productPrice: price, quantity: 1 };
+      const existingOrders = JSON.parse(localStorage.getItem('orders')) || [];
+      localStorage.setItem('orders', JSON.stringify([...existingOrders, order]));
     }
   };
+  
+  
+  
   return (
     <div>
       <h1>All Products</h1>

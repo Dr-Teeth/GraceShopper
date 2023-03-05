@@ -29,6 +29,10 @@ const SingleProduct = () => {
           dispatch(addOrder(data));
         })
         .catch((error) => console.error(error));
+    } else {
+      const order = { productName: name, productPrice: price, quantity: 1 };
+      const existingOrders = JSON.parse(localStorage.getItem('orders')) || [];
+      localStorage.setItem('orders', JSON.stringify([...existingOrders, order]));
     }
   };
 
