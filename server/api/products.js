@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const Sequelize = require('sequelize');
 const {
   models: { Products },
 } = require('../db');
@@ -29,8 +28,6 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-
-
 router.delete('/:itemId', async (req, res, next) => {
   try {
     const deletedProduct = await Products.findByPk(req.params.itemId);
@@ -38,5 +35,44 @@ router.delete('/:itemId', async (req, res, next) => {
     res.sendStatus(200);
   } catch (error) {
     next(error);
+  }
+});
+
+// This is the admin route (:
+router.delete('/:id', async (req, res, next) => {
+  try {
+    await Products.destroy({
+      where: {
+        id: req.params.id
+      }
+    });
+  } catch (error) {
+    console.error(error)
+  }
+});
+
+router.put('/:id', async (req, res, next) => {
+  try {
+    const { name, description, price, quantity, imageUrl } = req.body;
+    await Products.update({ name, description, price, quantity, imageUrl }, {
+      where: {
+        id: req.params.id
+      }
+    })
+    res.status(200).json({ message: "Product updated successfully" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+router.post('/', async (req, res, next) => {
+  try {
+    const { name, description, price, quantity, imageUrl } = req.body;
+    await Products.create({ name, description, price, quantity, imageUrl }),
+    res.status(200).json({ message: "Product Created successfully" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Server error" });
   }
 });
