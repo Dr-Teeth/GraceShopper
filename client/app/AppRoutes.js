@@ -8,6 +8,9 @@ import EditUser from '../features/editUser/EditUser';
 import Home from '../features/home/Home';
 import AllProducts from '../features/products/AllProducts';
 import Admin from '../features/admin/Admin'
+import EditProductAdmin from '../features/admin/EditProductAdmin';
+import EditUserAdmin from '../features/admin/EditUserAdmin';
+import AddProductAdmin from '../features/admin/AddProductAdmin'
 import { me } from './store';
 import Cart from '../features/cart/Cart';
 
@@ -27,9 +30,12 @@ const AppRoutes = () => {
   return (
     <Routes>
       {isAdmin && <Route path="/dashboard" element={<Admin />} />}
+      {isAdmin && <Route path="/dashboard/editUser/:id" element={<EditUserAdmin />} />}
+      {isAdmin && <Route path="/dashboard/editProduct/:id" element={<EditProductAdmin />} />}
+      {isAdmin && <Route path="/dashboard/addProduct" element={<AddProductAdmin />} />}
       {isLoggedIn && (
         <>
-          <Route path="/" element={<Home />} />
+          <Route path="/*" element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/vans" element={<AllProducts />} />
           <Route path={`/users/:id`} element={<SingleUser id={id} />} />
