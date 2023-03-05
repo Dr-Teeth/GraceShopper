@@ -10,7 +10,6 @@ import AllProducts from '../features/products/AllProducts';
 import SingleProduct from '../features/products/SingleProduct';
 import Admin from '../features/admin/Admin'
 import { me } from './store';
-import Cart from '../features/cart/Cart';
 
 const AppRoutes = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
@@ -37,14 +36,12 @@ const AppRoutes = () => {
             <Route path="/vans/:id" element={<SingleProduct />} />
             <Route path={`/users/:id`} element={<SingleUser id={id} />} />
             <Route path={`/editUser/:id`} element={<EditUser id={id} />} />
-            <Route path={`/cart`} element={<Cart />} />
           </>
         )}
         {!isLoggedIn && (
           <>
             <Route path="/login" element={<AuthForm name="login" displayName="Login" />} />
             <Route path="/signup" element={<AuthForm name="signup" displayName="Sign Up" />} />
-            <Route path={`/cart`} element={<Cart />} />
             <Route path="/vans" element={<AllProducts />} />
             <Route path="/vans/:id" element={<SingleProduct />} />
 
