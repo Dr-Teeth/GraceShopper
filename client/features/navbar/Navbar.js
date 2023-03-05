@@ -30,7 +30,7 @@ const Navbar = () => {
             <Link to="/home">Home</Link>
             <Link to="/vans">All Vans</Link>
             <Link to={`/users/${auth.me.id}`}>My Profile</Link>
-            {isAdmin && <Link to="/dashboard">Admin Dashboard</Link>}
+            {isAdmin && <Link to={"/dashboard"}>Admin Dashboard</Link>}
             <button type="button" onClick={logoutAndRedirectHome}>
               Logout
             </button>

@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { editUserAsync } from '../editUser/editUserSlice'
 import { useNavigate, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { editUserAdminAsync } from './adminSlice';
 
-const EditUser = () => {
+const EditUserAdmin = () => {
   const [firstN, editFName] = useState("");
   const [lastN, editLName] = useState("");
   const [address, editAddress] = useState("");
   const [phone, editPhone] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
 
-  const auth = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -22,9 +22,13 @@ const EditUser = () => {
     if (lastN) updatedFields.lastName = lastN;
     if (address) updatedFields.address = address;
     if (phone) updatedFields.phone = phone;
-    dispatch(editUserAsync({ id, ...updatedFields }));
-    navigate(`/users/${auth.me.id}`);
+    if (isAdmin !== undefined) updatedFields.isAdmin = isAdmin;
+    if (Object.keys(updatedFields).length > 0) {
+      dispatch(editUserAdminAsync({ id, ...updatedFields }));
+    }
+    navigate(`/dashboard`);
   };
+
 
   return (
     <div>
@@ -60,10 +64,18 @@ const EditUser = () => {
           value={phone}
           onChange={(e) => editPhone(e.target.value)}
         />
-        <button type='submit' disabled={!firstN && !lastN && !phone && !address ? true : false}>Save Changes</button>
+
+        <label htmlFor="isAdmin">Admin Status: </label>
+        <select defaultValue={isAdmin} onChange={(e) => setIsAdmin(e.target.value)}>
+          <option value={true}>Admin</option>
+          <option value={false}>Not an Admin</option>
+        </select>
+
+
+        <button type='submit' disabled={!firstN && !lastN && !phone && !address && !isAdmin ? true : false}>Save Changes</button>
       </form>
     </div>
   )
 }
 
-export default EditUser;
+export default EditUserAdmin;

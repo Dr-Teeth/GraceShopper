@@ -9,6 +9,9 @@ import Home from '../features/home/Home';
 import AllProducts from '../features/products/AllProducts';
 import SingleProduct from '../features/products/SingleProduct';
 import Admin from '../features/admin/Admin'
+import EditProductAdmin from '../features/admin/EditProductAdmin';
+import EditUserAdmin from '../features/admin/EditUserAdmin';
+import AddProductAdmin from '../features/admin/AddProductAdmin'
 import { me } from './store';
 
 const AppRoutes = () => {
@@ -25,30 +28,30 @@ const AppRoutes = () => {
   }, [dispatch, id]);
 
   return (
-    <div>
-      <Routes>
-        {isAdmin && <Route path="/dashboard" element={<Admin />} />}
-        {isLoggedIn && (
-          <>
-            <Route path="/" element={<Home />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/vans" element={<AllProducts />} />
-            <Route path="/vans/:id" element={<SingleProduct />} />
-            <Route path={`/users/:id`} element={<SingleUser id={id} />} />
-            <Route path={`/editUser/:id`} element={<EditUser id={id} />} />
-          </>
-        )}
-        {!isLoggedIn && (
-          <>
-            <Route path="/login" element={<AuthForm name="login" displayName="Login" />} />
-            <Route path="/signup" element={<AuthForm name="signup" displayName="Sign Up" />} />
-            <Route path="/vans" element={<AllProducts />} />
-            <Route path="/vans/:id" element={<SingleProduct />} />
-
-          </>
-        )}
-      </Routes>
-    </div>
+    <Routes>
+      {isAdmin && <Route path="/dashboard" element={<Admin />} />}
+      {isAdmin && <Route path="/dashboard/editUser/:id" element={<EditUserAdmin />} />}
+      {isAdmin && <Route path="/dashboard/editProduct/:id" element={<EditProductAdmin />} />}
+      {isAdmin && <Route path="/dashboard/addProduct" element={<AddProductAdmin />} />}
+      {isLoggedIn && (
+        <>
+          <Route path="/*" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/vans" element={<AllProducts />} />
+          <Route path="/vans/:id" element={<SingleProduct />} />
+          <Route path={`/users/:id`} element={<SingleUser id={id} />} />
+          <Route path={`/editUser/:id`} element={<EditUser id={id} />} />
+        </>
+      )}
+      {!isLoggedIn && (
+        <>
+          <Route path="/login" element={<AuthForm name="login" displayName="Login" />} />
+          <Route path="/signup" element={<AuthForm name="signup" displayName="Sign Up" />} />
+          <Route path="/vans" element={<AllProducts />} />
+          <Route path="/vans/:id" element={<SingleProduct />} />
+        </>
+      )}
+    </Routes>
   );
 
 };

@@ -8,13 +8,13 @@ router.get('/', async (req, res, next) => {
       // explicitly select only the id and username fields - even though
       // users' passwords are encrypted, it won't help if we just
       // send everything to anyone who asks!
-      attributes: ['id', 'username', "firstN", "lastN", "isAdmin"]
+      attributes: ['id', 'username', "firstN", "lastN", "isAdmin", "address", "phone", "email"]
     })
     res.json(users)
   } catch (err) {
     next(err)
   }
-})
+});
 
 router.get('/:id', async (req, res, next) => {
   try {
@@ -25,22 +25,33 @@ router.get('/:id', async (req, res, next) => {
     })
     res.json(users)
   } catch (error) {
-    console.log(error)
+    res.status(500).json({ error: "Server error"})
   }
 })
 
+// Admin Edit
 router.put('/:id', async (req, res, next) => {
   try {
-    const { firstN, lastN, address, phone } = req.body;
-    console.log(req.body)
-    await User.update({ firstN, lastN, address, phone }, {
+    const { firstN, lastN, address, phone, isAdmin } = req.body;
+    await User.update({ firstN, lastN, address, phone, isAdmin }, {
       where: {
         id: req.params.id
       }
-    })
+    });
     res.status(200).json({ message: "User updated successfully" });
   } catch (error) {
-    console.log(error);
     res.status(500).json({ error: "Server error" });
+  }
+});
+
+router.delete('/:id', async (req, res, next) => {
+  try {
+    await User.destroy({
+      where: {
+        id: req.params.id
+      }
+    });
+  } catch (error) {
+    console.error(error)
   }
 });
