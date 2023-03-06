@@ -8,6 +8,7 @@ const Home = () => {
   return (
     <div>
       <h3>Welcome, {username ? username : "Guest"}</h3>
+      <Slider />
     </div>
   );
 };
