@@ -52,6 +52,7 @@ const AllProducts = () => {
       localStorage.setItem('orders', JSON.stringify([...existingOrders, order]));
     }
   };
+
   return (
     <div>
       <h1>{username ? `Shopping as:  ${username}` : "Viewing as Guest"}</h1>
@@ -63,7 +64,11 @@ const AllProducts = () => {
             <img src={product.imageUrl} alt={product.name} />
             <p>Price: ${product.price}</p>
           </Link>
-          <button onClick={() => handleAddToCart(product.id, product.name, product.price, userId)}>Add to Cart</button>
+          {isLoggedIn && (
+            <button onClick={() => handleAddToCart(product.id, product.name, product.price, userId)}>
+              Add to Cart
+            </button>
+          )}
         </div>
       ))}
     </div>
