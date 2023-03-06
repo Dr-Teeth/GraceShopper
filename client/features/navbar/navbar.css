@@ -6,6 +6,10 @@
     color: #fff;
     padding: 10px 20px;
     font-family: 'Montserrat', sans-serif;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
   }
   
   .navbar h1 {

@@ -21,7 +21,6 @@ router.post('/', async (req, res, next) => {
     }
   });
 
-
 router.put('/:orderId', async (req, res, next) => {
   try {
     const { orderId } = req.params;
@@ -34,6 +33,20 @@ router.put('/:orderId', async (req, res, next) => {
     } else {
       res.sendStatus(404);
     }
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.delete('/:orderId', async (req, res, next) => {
+  try {
+    const { orderId } = req.params;
+    await Order.destroy({
+      where: {
+        id: orderId
+      }
+    });
+    res.sendStatus(204);
   } catch (err) {
     next(err);
   }
