@@ -1,7 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { authenticate } from '../../app/store';
-import { Navigate, useNavigate } from 'react-router-dom';
 
 /**
   The AuthForm component can be used for Login or Sign Up.
@@ -12,7 +11,6 @@ import { Navigate, useNavigate } from 'react-router-dom';
 const AuthForm = ({ name, displayName }) => {
   const { error } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  const Navigate = useNavigate();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -25,6 +23,7 @@ const AuthForm = ({ name, displayName }) => {
 
    return (
     <div>
+      <h1>Login / Sign-Up</h1>
       <form onSubmit={handleSubmit} name={name}>
         <div>
           <label htmlFor="username">

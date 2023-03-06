@@ -28,10 +28,12 @@ const Admin = () => {
 
   const handleDeleteProduct = (id) => {
     dispatch(deleteProductAsync(id));
+    dispatch(fetchProductsAsync());
   };
 
   const handleDeleteUser = (id) => {
     dispatch(deleteUserAsync(id));
+    dispatch(fetchAllUsers());
   };
   return (
     <>

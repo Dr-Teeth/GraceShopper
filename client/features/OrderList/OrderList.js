@@ -7,6 +7,10 @@ const OrderList = () => {
   const loggedInUserId = useSelector((state) => state.auth.me.id);
   const firstN = useSelector((state) => state.auth.me.firstN);
 
+  useEffect(() => {
+    fetchOrders(loggedInUserId);
+  }, [loggedInUserId]);
+
   const fetchOrders = async () => {
     try {
       let allOrders = [];
@@ -105,7 +109,7 @@ const OrderList = () => {
       <h2>{firstN}'s Orders</h2>
       <ul>
         {orders.map((order, index) => (
-          <li key={order.id}>
+          <li key={index}>
             <span>
               {order.productName} - ${order.productPrice} - Quantity: {order.quantity}
             </span>

@@ -2,12 +2,13 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchProductsAsync, selectAllProducts } from './AllProductsSlice';
 import { addOrder } from '../dataSlice';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 
 const AllProducts = () => {
   const dispatch = useDispatch();
   const { products, status, error } = useSelector(selectAllProducts);
-
+  const username = useSelector((state) => state.auth.me.username);
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const userId = useSelector((state) => state.auth.me.id);
 
@@ -36,7 +37,8 @@ const AllProducts = () => {
         body: JSON.stringify({
           userId,
           product: JSON.stringify(product),
-          quantity: 1
+          quantity: 1,
+          id: uuidv4()
         })
       })
         .then((response) => response.json())
@@ -45,7 +47,7 @@ const AllProducts = () => {
         })
         .catch((error) => console.error(error));
     } else {
-      const order = { productName: name, productPrice: price, quantity: 1 };
+      const order = { id: uuidv4(), productName: name, productPrice: price, quantity: 1 };
       const existingOrders = JSON.parse(localStorage.getItem('orders')) || [];
       localStorage.setItem('orders', JSON.stringify([...existingOrders, order]));
     }
@@ -53,6 +55,7 @@ const AllProducts = () => {
 
   return (
     <div>
+      <h1>{username ? `Shopping as:  ${username}` : "Viewing as Guest"}</h1>
       <h1>All Products</h1>
       {products.map((product) => (
         <div key={product.id}>
