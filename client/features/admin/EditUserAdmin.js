@@ -10,7 +10,6 @@ const EditUserAdmin = () => {
   const [phone, editPhone] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
 
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
@@ -18,14 +17,12 @@ const EditUserAdmin = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const updatedFields = {};
-    if (firstN) updatedFields.firstName = firstN;
-    if (lastN) updatedFields.lastName = lastN;
+    if (firstN) updatedFields.firstN = firstN;
+    if (lastN) updatedFields.lastN = lastN;
     if (address) updatedFields.address = address;
     if (phone) updatedFields.phone = phone;
     if (isAdmin !== undefined) updatedFields.isAdmin = isAdmin;
-    if (Object.keys(updatedFields).length > 0) {
       dispatch(editUserAdminAsync({ id, ...updatedFields }));
-    }
     navigate(`/dashboard`);
   };
 

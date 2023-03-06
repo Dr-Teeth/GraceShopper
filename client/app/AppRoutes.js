@@ -47,6 +47,8 @@ const AppRoutes = () => {
       )}
       {!isLoggedIn && (
         <>
+          <Route path="/*" element={<Home />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/login" element={<AuthForm name="login" displayName="Login" />} />
           <Route path="/signup" element={<AuthForm name="signup" displayName="Sign Up" />} />
           <Route path="/vans" element={<AllProducts />} />

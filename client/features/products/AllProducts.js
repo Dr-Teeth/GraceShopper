@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchProductsAsync, selectAllProducts } from './AllProductsSlice';
+import { Link } from 'react-router-dom'
 import { addOrder } from '../dataSlice';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -50,9 +51,6 @@ const AllProducts = () => {
       localStorage.setItem('orders', JSON.stringify([...existingOrders, order]));
     }
   };
-  
-  
-  
   return (
     <div>
       <h1>All Products</h1>
