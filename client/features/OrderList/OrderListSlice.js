@@ -21,9 +21,20 @@ const orderListSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    updateOrder(state, action) {
+      const { orderId, quantity } = action.payload;
+      const order = state.orders.find(order => order.id === orderId);
+      if (order) {
+        order.quantity = quantity;
+      }
+    },
+    deleteOrder(state, action) {
+      const { orderId } = action.payload;
+      state.orders = state.orders.filter(order => order.id !== orderId);
+    }
   },
 });
 
-export const { fetchOrdersStart, fetchOrdersSuccess, fetchOrdersFailure } = orderListSlice.actions;
+export const { fetchOrdersStart, fetchOrdersSuccess, fetchOrdersFailure, updateOrder, deleteOrder } = orderListSlice.actions;
 
 export default orderListSlice.reducer;
