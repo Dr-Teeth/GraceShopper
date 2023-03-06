@@ -7,9 +7,14 @@ const OrderList = () => {
   const loggedInUserId = useSelector((state) => state.auth.me.id);
   const firstN = useSelector((state) => state.auth.me.firstN);
 
+  useEffect(() => {
+    fetchOrders(loggedInUserId);
+  }, [loggedInUserId]);
+
   const fetchOrders = async () => {
     try {
-      const response = await fetch('/api/orders');
+      const response = await fetch(`/api/orders/${loggedInUserId}`);
+      console.log(response)
       const ordersFromServer = await response.json();
       const localOrders = JSON.parse(localStorage.getItem('orders')) || [];
       const allOrders = [...ordersFromServer, ...localOrders];
@@ -29,10 +34,6 @@ const OrderList = () => {
       console.error(error);
     }
   };
-
-  useEffect(() => {
-    fetchOrders();
-  }, []);
 
   const handleIncrementQuantity = async (orderId) => {
     try {
@@ -59,7 +60,7 @@ const OrderList = () => {
       console.error(error);
     }
   };
-  
+
 
   const handleDelete = async (orderId) => {
     try {
@@ -110,7 +111,7 @@ const OrderList = () => {
       <h2>{cartTitle}</h2>
       <ul>
         {orders.map((order, index) => (
-          <li key={order.id}>
+          <li key={index}>
             <span>
               {order.productName} - ${order.productPrice} - Quantity: {order.quantity}
             </span>
