@@ -9,10 +9,13 @@ const OrderList = () => {
 
   const fetchOrders = async () => {
     try {
-      const response = await fetch('/api/orders');
-      const ordersFromServer = await response.json();
-      const localOrders = JSON.parse(localStorage.getItem('orders')) || [];
-      const allOrders = [...ordersFromServer, ...localOrders];
+      let allOrders = [];
+      if (loggedInUserId) {
+        const response = await fetch(`/api/orders/${loggedInUserId}`);
+        const ordersFromServer = await response.json();
+        allOrders = [...ordersFromServer];
+      }
+
       const uniqueOrders = allOrders.reduce((accumulator, current) => {
         const existingOrder = accumulator.find(
           (order) => order.productName === current.productName
@@ -32,7 +35,8 @@ const OrderList = () => {
 
   useEffect(() => {
     fetchOrders();
-  }, []);
+  }, [loggedInUserId]);
+
 
   const handleIncrementQuantity = async (orderId) => {
     try {
@@ -59,7 +63,6 @@ const OrderList = () => {
       console.error(error);
     }
   };
-  
 
   const handleDelete = async (orderId) => {
     try {
@@ -83,16 +86,10 @@ const OrderList = () => {
         },
         body: JSON.stringify(orders),
       });
-      localStorage.removeItem('orders');
       setOrders([]);
     } catch (error) {
       console.error(error);
     }
-  };
-
-  const handleEmptyCart = () => {
-    localStorage.removeItem('orders');
-    setOrders([]);
   };
 
   useEffect(() => {
@@ -103,11 +100,9 @@ const OrderList = () => {
     setTotalPrice(total);
   }, [orders]);
 
-  const cartTitle = loggedInUserId ? `${firstN}'s Orders` : "Guest's cart";
-
   return (
     <div>
-      <h2>{cartTitle}</h2>
+      <h2>{firstN}'s Orders</h2>
       <ul>
         {orders.map((order, index) => (
           <li key={order.id}>
@@ -115,14 +110,14 @@ const OrderList = () => {
               {order.productName} - ${order.productPrice} - Quantity: {order.quantity}
             </span>
             <button onClick={() => handleDelete(order.id)}>-</button>
-            <button onClick={() => handleIncrementQuantity(order.id)}>+</button>
+            <
+button onClick={() => handleIncrementQuantity(order.id)}>+</button>
           </li>
         ))}
       </ul>
       {orders.length > 0 && (
         <>
           <div>Total Price: ${totalPrice}</div>
-          <button onClick={handleEmptyCart}>Empty Cart</button>
           {loggedInUserId && (
             <>
               {/* <button onClick={handleCheckout}>Checkout</button> */}
