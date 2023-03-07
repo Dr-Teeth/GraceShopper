@@ -27,7 +27,7 @@ const Navbar = () => {
         {isLoggedIn ? (
           <div>
             {/* The navbar will show these links after you log in */}
-            <Link to="/home">Home</Link>
+            {/* <Link to="/home">Home</Link> */}
             <Link to="/vans">All Vans</Link>
             <Link to={`/users/${auth.me.id}`}>My Profile</Link>
             {isAdmin && <Link to={"/dashboard"}>Admin Dashboard</Link>}
@@ -44,9 +44,6 @@ const Navbar = () => {
             <Link to="/vans">All Vans</Link>
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>
-            <Link to="/orders">
-              <ShoppingCart size={32} />
-            </Link>
           </div>
         )}
       </nav>

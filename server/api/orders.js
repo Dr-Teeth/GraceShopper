@@ -72,7 +72,7 @@ router.get('/history', async (req, res, next) => {
         userId: req.user.id,
         status: 'completed'
       },
-      include: [{ model: Art }]
+      include: [{ model: order }]
     })
 
     res.json(order)

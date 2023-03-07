@@ -48,8 +48,11 @@ const SingleProduct = () => {
           <img src={product.imageUrl} alt={product.name} />
           <p>{product.description}</p>
           <p>${product.price}</p>
-          <button onClick={() => handleAddToCart(product.id, product.name, product.price, userId)}>Add to Cart</button>
-        </>
+          {isLoggedIn && (
+            <button onClick={() => handleAddToCart(product.id, product.name, product.price, userId)}>
+              Add to Cart
+            </button>
+          )}        </>
       )}
     </div>
   );
