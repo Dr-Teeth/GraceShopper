@@ -23,7 +23,7 @@ const Admin = () => {
     return <div>{error}</div>;
   };
   if (products.length === 0) {
-    return <div>No products found</div>;
+    return <div>{selectAllProducts ? "No products found" : "No Users Found"}</div>;
   };
 
   const handleDeleteProduct = (id) => {
@@ -35,6 +35,7 @@ const Admin = () => {
     dispatch(deleteUserAsync(id));
     dispatch(fetchAllUsers());
   };
+
   return (
     <>
     <h1>Hello, {username} Welcome to the Admin Dashboard</h1>

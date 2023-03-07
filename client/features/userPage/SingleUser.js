@@ -17,13 +17,13 @@ const SingleUser = () => {
   const {firstN, lastN, address, phone, email} = user ? user : {}
 
   const requestStatus = useSelector((state) => state.singleUser.requestStatus);
-  
+
   if (requestStatus === 'pending') {
         return <div>Loading...</div>;
-      }
+      };
       if (!user) {
         return <div>User not found</div>;
-      }
+      };
 
   return (
     <div>
@@ -41,7 +41,6 @@ const SingleUser = () => {
           <div>Loading...</div>
         )}
     </div>
-  )
-}
+  )};
 
 export default SingleUser;

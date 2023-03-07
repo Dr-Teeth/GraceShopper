@@ -26,7 +26,6 @@ const EditUserAdmin = () => {
     navigate(`/dashboard`);
   };
 
-
   return (
     <div>
       <form onSubmit={handleSubmit}>
