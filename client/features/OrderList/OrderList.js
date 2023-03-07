@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import Checkout from '../checkout/checkout';
 
 const OrderList = () => {
   const [orders, setOrders] = useState([]);
@@ -74,22 +75,6 @@ const OrderList = () => {
     }
   };
 
-  const handleCheckout = async () => {
-    try {
-      await fetch(`/api/orders/checkout/${loggedInUserId}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(orders),
-      });
-      localStorage.removeItem('orders');
-      setOrders([]);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   const handleEmptyCart = () => {
     localStorage.removeItem('orders');
     setOrders([]);
@@ -109,7 +94,7 @@ const OrderList = () => {
     <div>
       <h2>{cartTitle}</h2>
       <ul>
-        {orders.map((order, index) => (
+        {orders.map((order) => (
           <li key={order.id}>
             <span>
               {order.productName} - ${order.productPrice} - Quantity: {order.quantity}
@@ -125,7 +110,12 @@ const OrderList = () => {
           <button onClick={handleEmptyCart}>Empty Cart</button>
           {loggedInUserId && (
             <>
-              {/* <button onClick={handleCheckout}>Checkout</button> */}
+              <Checkout 
+              name="My Online Store"
+              description="Order Payment"
+              amount={totalPrice * 100}
+              handleCheckoutSuccess={fetchOrders}
+            />
             </>
           )}
         </>
@@ -133,5 +123,7 @@ const OrderList = () => {
     </div>
   );
 };
+
+
 
 export default OrderList;

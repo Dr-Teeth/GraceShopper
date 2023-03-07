@@ -11,15 +11,15 @@ router.get('/', async (req, res, next) => {
 });
 
 router.post('/', async (req, res, next) => {
-    try {
-      const { userId, product, quantity } = req.body;
-      const { name, price } = JSON.parse(product);
-      const order = await Order.create({ userId, productName: name, productPrice: price, quantity });
-      res.status(201).json(order);
-    } catch (err) {
-      next(err);
-    }
-  });
+  try {
+    const { userId, product, quantity } = req.body;
+    const { name, price } = JSON.parse(product);
+    const order = await Order.create({ userId, productName: name, productPrice: price, quantity });
+    res.status(201).json(order);
+  } catch (err) {
+    next(err);
+  }
+});
 
 router.put('/:orderId', async (req, res, next) => {
   try {
@@ -53,16 +53,34 @@ router.delete('/:orderId', async (req, res, next) => {
 });
 
 router.get('/:userId', async (req, res, next) => {
-    try {
-      const orders = await Order.findAll({
-        where: {
-          userId: req.params.userId
-        }
-      });
-      res.json(orders);
-    } catch (err) {
-      next(err);
-    }
-  }); 
+  try {
+    const orders = await Order.findAll({
+      where: {
+        userId: req.params.userId
+      }
+    });
+    res.json(orders);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get('/history', async (req, res, next) => {
+  try {
+    const order = await Order.findAll({
+      where: {
+        userId: req.user.id,
+        status: 'completed'
+      },
+      include: [{ model: Art }]
+    })
+
+    res.json(order)
+  } catch (error) {
+    next(error)
+  }
+})
 
 module.exports = router;
+
+
