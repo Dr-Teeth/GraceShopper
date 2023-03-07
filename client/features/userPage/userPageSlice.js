@@ -4,15 +4,13 @@ import axios from "axios";
 
 const initialState = [];
 
-export const fetchSingleUser = createAsyncThunk("singleUser/fetchSingleUser", async (id, thunkAPI) => {
+export const fetchSingleUser = createAsyncThunk("singleUser/fetchSingleUser", async (id) => {
   try {
     const response = await axios.get(`/api/users/${id}`);
     const user = response.data;
-    console.log(user)
     return user
   } catch (error) {
-    console.error(error);
-    return thunkAPI.rejectWithValue(error.message)
+    throw new error;
   }
 });
 
