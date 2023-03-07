@@ -14,6 +14,9 @@ import EditUserAdmin from '../features/admin/EditUserAdmin';
 import AddProductAdmin from '../features/admin/AddProductAdmin'
 import { me } from './store';
 import OrderList from '../features/OrderList/OrderList';
+import OrderHistory from '../features/checkout/orderHistory';
+import Checkout from '../features/checkout/checkout';
+import ThankYou from '../features/checkout/thankyou'
 
 const AppRoutes = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
@@ -43,6 +46,9 @@ const AppRoutes = () => {
           <Route path={`/users/:id`} element={<SingleUser id={id} />} />
           <Route path={`/editUser/:id`} element={<EditUser id={id} />} />
           <Route path="/orders" element={<OrderList userId={id} />} />
+          <Route path='/orderhistory' element={<OrderHistory />} />
+          <Route path='/checkout' element={<Checkout />} />
+          <Route path="/thankyou" element={ThankYou} />
         </>
       )}
       {!isLoggedIn && (
@@ -54,6 +60,8 @@ const AppRoutes = () => {
           <Route path="/vans" element={<AllProducts />} />
           <Route path="/vans/:id" element={<SingleProduct />} />
           <Route path="/orders" element={<OrderList userId={id} />} />
+          <Route path='/checkout' element={<Checkout />} />
+          <Route path="/thankyou" element={ThankYou} />
         </>
       )}
     </Routes>
