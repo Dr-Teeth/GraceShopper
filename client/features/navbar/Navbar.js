@@ -1,21 +1,27 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import { logout } from '../../app/store';
-import { ShoppingCart } from 'phosphor-react';
-import './navbar.css';
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { logout } from "../../app/store";
+import { ShoppingCart } from "phosphor-react";
+import "./navbar.css";
+import { Button, Container, Modal } from "react-bootstrap";
+import Cart from "../cart/Cart";
 
 const Navbar = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const auth = useSelector((state) => state.auth);
   const isAdmin = useSelector((state) => state.auth.me.isAdmin);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const firstN = useSelector((state) => state.auth.me.firstN);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const logoutAndRedirectHome = () => {
     dispatch(logout());
-    navigate('/login');
+    navigate("/login");
   };
 
   return (
@@ -32,9 +38,15 @@ const Navbar = () => {
             <button type="button" onClick={logoutAndRedirectHome}>
               Logout
             </button>
-            <Link to="/orders">
-              <ShoppingCart size={32} />
-            </Link>
+            <Button onClick={handleShow}>Cart 0 Items</Button>
+            <Modal show={show} onHide={handleClose}>
+              <Modal.Header closeButton>
+                <Modal.Title>{firstN}'s Orders</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <Cart />
+              </Modal.Body>
+            </Modal>
           </div>
         ) : (
           <div>
@@ -48,8 +60,3 @@ const Navbar = () => {
   );
 };
 export default Navbar;
-
-
-
-
-
