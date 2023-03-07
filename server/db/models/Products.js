@@ -20,7 +20,6 @@ const db = require('../db')
   },
   imageUrl: {
     type: Sequelize.TEXT,
-    defaultValue: 'https://cdn-icons-png.flaticon.com/512/7057/7057942.png',
     isUrl: true
   }
 })

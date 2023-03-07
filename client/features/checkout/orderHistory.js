@@ -62,7 +62,7 @@ const OrderHistory = () => {
                                     )
                                 })}
                             </ul>
-                        </div>
+                        </div>  
                     )}
                 </div>
             ) : (

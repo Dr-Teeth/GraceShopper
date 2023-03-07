@@ -16,11 +16,11 @@ const OrderList = () => {
     try {
       let allOrders = [];
       if (loggedInUserId) {
-        const response = await fetch(`/api/orders`);
+        const response = await fetch(`/api/orders/${loggedInUserId}`);
         const ordersFromServer = await response.json();
         allOrders = [...ordersFromServer];
       }
-
+  
       const uniqueOrders = allOrders.reduce((accumulator, current) => {
         const existingOrder = accumulator.find(
           (order) => order.productName === current.productName
@@ -37,6 +37,8 @@ const OrderList = () => {
       console.error(error);
     }
   };
+  
+  
 
   useEffect(() => {
     fetchOrders();
@@ -76,7 +78,7 @@ const OrderList = () => {
       });
       const newOrders = orders.filter((order) => order.id !== orderId);
       setOrders(newOrders);
-      fetchOrders();
+      // fetchOrders();
     } catch (error) {
       console.error(error);
     }
