@@ -53,17 +53,18 @@ router.delete('/:orderId', async (req, res, next) => {
 });
 
 router.get('/:userId', async (req, res, next) => {
-  try {
-    const orders = await Order.findAll({
-      where: {
-        userId: req.params.userId
-      }
-    });
-    res.json(orders);
-  } catch (err) {
-    next(err);
-  }
-});
+    try {
+      const orders = await Order.findAll({
+        where: {
+          userId: req.params.userId
+        }
+      });
+      res.json(orders);
+    } catch (err) {
+      next(err);
+    }
+  });
+  
 
 router.get('/history', async (req, res, next) => {
   try {
