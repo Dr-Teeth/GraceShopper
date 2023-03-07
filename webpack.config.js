@@ -1,7 +1,9 @@
+const path = require('path');
+
 module.exports = {
   entry: ['./client/index.js'],
   output: {
-    path: __dirname + '/public',
+    path: path.join(__dirname, '/public'),
     filename: 'bundle.js',
   },
   context: __dirname,
@@ -20,7 +22,14 @@ module.exports = {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
       },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
+      },
     ],
   },
-  
 };
