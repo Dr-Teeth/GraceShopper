@@ -1,5 +1,5 @@
 import React from 'react';
-import OrderList from '../orderList/orderList';
+import OrderList from '../OrderList/OrderList';
 
 const Cart = () => {
   return (

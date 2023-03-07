@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import StripeCheckout from 'react-stripe-checkout'
 import axios from 'axios'
 import history from '../history'
+import badge from '../../../public/Imgs/stripe-badge-grey.png';
 
 // const navigate = useNavigate();
 const CURRENCY = 'USD';
@@ -42,7 +43,7 @@ const Checkout = ({name, description, amount, handleCheckoutSuccess}) => {
   }, [history]);
   
   return (
-    <div>
+    <div className='cart'>
       <StripeCheckout
         name={name}
         description={description}
@@ -52,6 +53,7 @@ const Checkout = ({name, description, amount, handleCheckoutSuccess}) => {
         stripeKey="pk_test_51MigRUES3iKSqq49RCFL9Zqm6dCpUSQFDZYwJyqGG1JqHXperqIXBtNq3XRGbPnxmcebq0vqxSg7PtLTZR8FDAbf00kIqNKWZm"
         label="Pay with 💳"
       />
+    <img src={badge} />
     </div>
   )
 }

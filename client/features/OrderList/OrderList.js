@@ -106,8 +106,7 @@ const OrderList = () => {
   }, [orders]);
 
   return (
-    <div>
-      <h2>{firstN}'s Orders</h2>
+    <div className='cart'>
       <ul>
         {orders.map((order) => (
           <li key={order.id}>
