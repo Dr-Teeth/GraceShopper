@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import Checkout from '../checkout/checkout';
 
 const OrderList = () => {
   const [orders, setOrders] = useState([]);
@@ -81,6 +82,10 @@ const OrderList = () => {
     }
   };
 
+  const handleEmptyCart = () => {
+    localStorage.removeItem('orders');
+    setOrders([]);
+    
   const handleCheckout = async () => {
     try {
       await fetch(`/api/orders/checkout/${loggedInUserId}`, {
@@ -108,8 +113,8 @@ const OrderList = () => {
     <div>
       <h2>{firstN}'s Orders</h2>
       <ul>
-        {orders.map((order, index) => (
-          <li key={index}>
+        {orders.map((order) => (
+          <li key={order.id}>
             <span>
               {order.productName} - ${order.productPrice} - Quantity: {order.quantity}
             </span>
@@ -124,7 +129,12 @@ button onClick={() => handleIncrementQuantity(order.id)}>+</button>
           <div>Total Price: ${totalPrice}</div>
           {loggedInUserId && (
             <>
-              {/* <button onClick={handleCheckout}>Checkout</button> */}
+              <Checkout 
+              name="My Online Store"
+              description="Order Payment"
+              amount={totalPrice * 100}
+              handleCheckoutSuccess={fetchOrders}
+            />
             </>
           )}
         </>
@@ -132,5 +142,7 @@ button onClick={() => handleIncrementQuantity(order.id)}>+</button>
     </div>
   );
 };
+
+
 
 export default OrderList;
