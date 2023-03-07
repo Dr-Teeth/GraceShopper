@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Slider.css";
 import BtnSlider from "./BtnSlider";
 import dataSlider from "./dataSlider";
@@ -25,6 +25,13 @@ export default function Slider() {
   const moveDot = (index) => {
     setSlideIndex(index);
   };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      nextSlide();
+    }, 4000);
+    return () => clearTimeout(timer);
+  }, [slideIndex]);
 
   return (
     <div className="container-slider">
