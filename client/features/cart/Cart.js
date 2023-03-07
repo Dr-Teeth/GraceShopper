@@ -1,12 +1,12 @@
-import React from 'react';
-import OrderList from '../orderList/orderList';
+// import React from 'react';
+// import OrderList from '../orderList/orderList';
 
-const Cart = () => {
-  return (
-    <div>
-      <OrderList />
-    </div>
-  );
-};
+// const Cart = () => {
+//   return (
+//     <div>
+//       <OrderList />
+//     </div>
+//   );
+// };
 
-export default Cart;
+// export default Cart;
