@@ -1,23 +1,24 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
-import axios from 'axios'
+import React, { useEffect } from 'react'
 import StripeCheckout from 'react-stripe-checkout'
-import {Redirect} from 'react-router-dom'
+import axios from 'axios'
 import history from '../history'
 import badge from '../../../public/Imgs/stripe-badge-grey.png';
 
-const CURRENCY = 'USD'
+// const navigate = useNavigate();
+const CURRENCY = 'USD';
+
+const errorPayment = data => {
+  alert(data)
+}
 
 const successPayment = data => {
   alert('Payment Successful')
   history.push('/thankyou')
 }
-const errorPayment = data => {
-  alert(data)
-}
-const onToken = (amount, description, handleCheckoutSuccess) => async token => {
+
+const onToken = async (amount, description, handleCheckoutSuccess, token) => {
   try {
-    const {data} = await axios.post('/api/stripe/checkout', {
+    const { data } = await axios.post('/stripe/checkout', {
       description,
       source: token.id,
       currency: CURRENCY,
@@ -31,13 +32,23 @@ const onToken = (amount, description, handleCheckoutSuccess) => async token => {
 }
 
 const Checkout = ({name, description, amount, handleCheckoutSuccess}) => {
+
+  useEffect(() => {
+    const unlisten = history.listen(() => {
+      window.location.reload();
+    });
+    return () => {
+      unlisten();
+    };
+  }, [history]);
+  
   return (
     <div className='cart'>
       <StripeCheckout
         name={name}
         description={description}
         amount={amount}
-        token={onToken(amount, description, handleCheckoutSuccess)}
+        token={token => onToken(amount, description, handleCheckoutSuccess, token)}
         currency={CURRENCY}
         stripeKey="pk_test_51MigRUES3iKSqq49RCFL9Zqm6dCpUSQFDZYwJyqGG1JqHXperqIXBtNq3XRGbPnxmcebq0vqxSg7PtLTZR8FDAbf00kIqNKWZm"
         label="Pay with 💳"
@@ -47,4 +58,4 @@ const Checkout = ({name, description, amount, handleCheckoutSuccess}) => {
   )
 }
 
-export default Checkout
+export default Checkout;

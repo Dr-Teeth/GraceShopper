@@ -16,7 +16,7 @@ const OrderList = () => {
     try {
       let allOrders = [];
       if (loggedInUserId) {
-        const response = await fetch(`/api/orders/${loggedInUserId}`);
+        const response = await fetch(`/api/orders`);
         const ordersFromServer = await response.json();
         allOrders = [...ordersFromServer];
       }

@@ -5,20 +5,27 @@ const stripe = configureStripe(
 )
 const router = require('express').Router()
 
-const postStripeCharge = res => (stripeErr, stripeRes) => {
+const postStripeCharge = async (res) => (stripeErr, stripeRes) => {
   if (stripeErr) {
     res.status(500).send({error: stripeErr})
   } else {
     res.status(200).send({success: stripeRes})
+    Order.findByPk(completed).then(order => {
+      order.completed = true;
+      order.save(); // Save the changes to the database
+    });
   }
 }
 
-router.post('/checkout', (req, res, next) => {
+router.post('/api/stripe/checkout', async (req, res, next) => {
   try {
-    stripe.charges.create(req.body, postStripeCharge(res))
+    const order = await Order.create(req.body); // Create the order in the database
+    stripe.charges.create(req.body, postStripeCharge(res, order.id)); // Pass the order ID to the postStripeCharge function
   } catch (error) {
     next(error)
   }
 })
+
+
 
 module.exports = router

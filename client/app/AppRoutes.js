@@ -47,8 +47,8 @@ const AppRoutes = () => {
           <Route path={`/editUser/:id`} element={<EditUser id={id} />} />
           <Route path="/orders" element={<OrderList userId={id} />} />
           <Route path='/orderhistory' element={<OrderHistory />} />
-          <Route path='/checkout' element={<Checkout />} />
-          <Route path="/thankyou" element={ThankYou} />
+          <Route path='/api/stripe/checkout' element={<Checkout />} />
+          <Route path="/thankyou" element={<ThankYou />} />
         </>
       )}
       {!isLoggedIn && (
@@ -60,7 +60,7 @@ const AppRoutes = () => {
           <Route path="/vans" element={<AllProducts />} />
           <Route path="/vans/:id" element={<SingleProduct />} />
           <Route path="/orders" element={<OrderList userId={id} />} />
-          <Route path='/checkout' element={<Checkout />} />
+          <Route path='/api/stripe/checkout' element={<Checkout />} />
           <Route path="/thankyou" element={<ThankYou />} />
         </>
       )}
