@@ -82,10 +82,6 @@ const OrderList = () => {
     }
   };
 
-  const handleEmptyCart = () => {
-    localStorage.removeItem('orders');
-    setOrders([]);
-    
   const handleCheckout = async () => {
     try {
       await fetch(`/api/orders/checkout/${loggedInUserId}`, {
@@ -119,8 +115,7 @@ const OrderList = () => {
               {order.productName} - ${order.productPrice} - Quantity: {order.quantity}
             </span>
             <button onClick={() => handleDelete(order.id)}>-</button>
-            <
-button onClick={() => handleIncrementQuantity(order.id)}>+</button>
+            <button onClick={() => handleIncrementQuantity(order.id)}>+</button>
           </li>
         ))}
       </ul>
@@ -142,7 +137,5 @@ button onClick={() => handleIncrementQuantity(order.id)}>+</button>
     </div>
   );
 };
-
-
 
 export default OrderList;

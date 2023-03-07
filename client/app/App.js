@@ -6,7 +6,7 @@ import Footer from "../features/footer/Footer";
 
 const App = () => {
   return (
-    <div>
+    <div className='poop'>
       <Navbar />
       <AppRoutes />
       <Footer />
