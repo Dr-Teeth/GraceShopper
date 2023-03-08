@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchSingleProduct, selectSingleProduct } from './SingleProductSlice';
-import { useParams } from 'react-router-dom';
-import { addOrder } from '../dataSlice';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchSingleProduct, selectSingleProduct } from "./SingleProductSlice";
+import { useParams } from "react-router-dom";
+import { addOrder } from "../dataSlice";
 
 const SingleProduct = () => {
   const dispatch = useDispatch();
@@ -21,8 +21,8 @@ const SingleProduct = () => {
         body: JSON.stringify({
           userId,
           product: JSON.stringify(product),
-          quantity: 1
-        })
+          quantity: 1,
+        }),
       })
         .then((response) => response.json())
         .then((data) => {
@@ -31,8 +31,11 @@ const SingleProduct = () => {
         .catch((error) => console.error(error));
     } else {
       const order = { productName: name, productPrice: price, quantity: 1 };
-      const existingOrders = JSON.parse(localStorage.getItem('orders')) || [];
-      localStorage.setItem('orders', JSON.stringify([...existingOrders, order]));
+      const existingOrders = JSON.parse(localStorage.getItem("orders")) || [];
+      localStorage.setItem(
+        "orders",
+        JSON.stringify([...existingOrders, order])
+      );
     }
   };
 
@@ -41,7 +44,7 @@ const SingleProduct = () => {
   }, [dispatch, id]);
 
   return (
-    <div>
+    <div className="singleP">
       {product && (
         <>
           <h3>{product.name}</h3>
@@ -54,10 +57,10 @@ const SingleProduct = () => {
 </button>
 
           )}        </>
+
       )}
     </div>
   );
-}
+};
 
 export default SingleProduct;
-

@@ -1,81 +1,81 @@
 .footer {
-    background-color: #212529;
-    color: white;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 20px;
-    padding: 30px;
-    margin-top: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-content: center;
-  }
+  background-color: #212529;
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  font-size: 20px;
+  padding: 30px;
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: center;
+}
 
-  .footer h3 {
-    font-size: 25px;
-    color: rgb(255, 255, 171);
-  }
-  
-  .top {
-    width: 100%;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  .both {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-  }
-  
-  .right {
-    text-align: right;
-  }
-  
-  .bottom {
-    width: 100%;
-    text-align: center;
-  }
-  
-  .footer h3 {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .footer ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .footer li {
-    margin-bottom: 5px;
-  }
-  
-  .footer a {
-    color: white;
-    text-decoration: none;
-  }
-  
-  .footer a:hover {
-    text-decoration: underline;
-    color: purple;
-  }
-  
-  .social-icons a {
-    margin-right: 10px;
-  }
-  
-  .copy-right {
-    margin-top: 30px;
-    text-align: center;
-    display: flex;
-    justify-content: flex-end;
-    flex: 1;
-  }
-  
-  .copy-right p {
-    margin: 0;
-    color: white;
-  }
+.footer h3 {
+  font-size: 25px;
+  color: rgb(255, 255, 171);
+}
+
+.top {
+  width: 100%;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.both {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.right {
+  text-align: right;
+}
+
+.bottom {
+  width: 100%;
+  text-align: center;
+}
+
+.footer h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer li {
+  margin-bottom: 5px;
+}
+
+.footer a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+  color: purple;
+}
+
+.social-icons a {
+  margin-right: 10px;
+}
+
+.copy-right {
+  margin-top: 30px;
+  text-align: center;
+  display: flex;
+  justify-content: flex-end;
+  flex: 1;
+}
+
+.copy-right p {
+  margin: 0;
+  color: white;
+}

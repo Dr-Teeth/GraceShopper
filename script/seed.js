@@ -1,21 +1,60 @@
-'use strict'
+"use strict";
 
-const {db, models: {User, Products} } = require('../server/db');
+const {
+  db,
+  models: { User, Products },
+} = require("../server/db");
 
 /**
  * seed - this function clears the database, updates tables to
  *      match the models, and populates the database.
  */
 async function seed() {
-  await db.sync({ force: true }) // clears db and matches models to tables
-  console.log('db synced!')
+  await db.sync({ force: true }); // clears db and matches models to tables
+  console.log("db synced!");
 
   // Creating Users
- const users = await Promise.all([
-    User.create({ username: 'Cody', password: '123', email: 'cody@gmail.com', firstN: "Cody", lastN: "DiBella", address: "123 Words Ln", phone: "(987) 654-3210", isAdmin: true }),
-    User.create({ username: 'Ron', password: '123', email: 'ron@aol.com', firstN: "Ronnie", lastN: "Angeles", address: "123 Words Ln", phone: "(123) 456-7890", isAdmin: true }),
-    User.create({ username: 'Chris', password: '123', email: 'chris@gmail.com', firstN: "Chris", lastN: "Kang", address: "123 Words Ln", phone: "911", isAdmin: true }),
-    User.create({ username: 'Ryan', password: '123', email: 'ryan@hotmail.com', firstN: "Ryan", lastN: "Pearl", address: "123 Words Ln", phone: "(702) 488-6981", isAdmin: true,  }),
+  const users = await Promise.all([
+    User.create({
+      username: "Cody",
+      password: "123",
+      email: "cody@gmail.com",
+      firstN: "Cody",
+      lastN: "DiBella",
+      address: "123 Words Ln",
+      phone: "(987) 654-3210",
+      isAdmin: true,
+    }),
+    User.create({
+      username: "Ron",
+      password: "123",
+      email: "ron@aol.com",
+      firstN: "Ronnie",
+      lastN: "Angeles",
+      address: "123 Words Ln",
+      phone: "(123) 456-7890",
+      isAdmin: true,
+    }),
+    User.create({
+      username: "Chris",
+      password: "123",
+      email: "chris@gmail.com",
+      firstN: "Chris",
+      lastN: "Kang",
+      address: "123 Words Ln",
+      phone: "911",
+      isAdmin: true,
+    }),
+    User.create({
+      username: "Ryan",
+      password: "123",
+      email: "ryan@hotmail.com",
+      firstN: "Ryan",
+      lastN: "Pearl",
+      address: "123 Words Ln",
+      phone: "(702) 488-6981",
+      isAdmin: true,
+    }),
   ]);
 
   const products = await Promise.all([
@@ -96,7 +135,7 @@ async function seed() {
       price: 20000,
       quantity: 10,
       imageUrl:
-        "https://scontent-dfw5-1.xx.fbcdn.net/v/t39.30808-6/310509150_611808353855121_4289088255081831774_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=8JmIvN3TqRMAX_AhYHH&_nc_ht=scontent-dfw5-1.xx&oh=00_AfAKFUpigvKJQyFrigwsZzl7WwEC1ALGA4WwxRAe3juffw&oe=6406E605",
+        "https://gamervan.co.uk/wp-content/uploads/2021/09/football-stadium-aspect-ratio-600-400.jpg",
     }),
     Products.create({
       name: "Bookworm Van",
@@ -261,12 +300,13 @@ async function seed() {
         "https://www.guyswithrides.com/wp-content/uploads/2021/10/727DAF2D-2EE0-40C8-BD46-F90FCCD05269.jpeg",
     }),
     Products.create({
-      name: "Harry Potter Van",
+      name: "Harry Potter Bus",
       description:
         "Calling all Harry Potter fans! This van is designed to look like the Hogwarts Express, complete with a comfortable sleeping area and a kitchenette to cook up some magical meals. It also features a built-in library with all your favorite Harry Potter books.",
-      price: 90000,
+      price: 300000,
       quantity: 4,
-      imageUrl: "https://cdn-icons-png.flaticon.com/512/7057/7057942.png",
+      imageUrl:
+        "https://images.squarespace-cdn.com/content/v1/59945385197aeacc911dc0ba/1587125053604-NXU6W2MRKR5VSKNC3J06/Harry+Potter+tour+bus-min.jpg",
     }),
     Products.create({
       name: "Game of Thrones Van",
@@ -300,7 +340,8 @@ async function seed() {
         "Calling all Lego fans! This van is designed to look like a giant Lego block, complete with a comfortable sleeping area and a kitchenette to cook up some colorful meals. It also features a built-in collection of Legos to play with.",
       price: 85000,
       quantity: 4,
-      imageUrl: "https://cdn-icons-png.flaticon.com/512/7057/7057942.png",
+      imageUrl:
+        "https://mymodernmet.com/wp/wp-content/uploads/2019/02/LEGO-volkswagen-camper-1.jpg",
     }),
     Products.create({
       name: "Pirates Van",
@@ -348,12 +389,13 @@ async function seed() {
         "https://i.pinimg.com/originals/72/17/17/7217173dd414fe0b292a5e33b0189fe0.jpg",
     }),
     Products.create({
-      name: "Little Mermaid Van",
+      name: "Little Mermaid Bus",
       description:
         "This van is perfect for those who love to be 'under the sea'! The interior is decorated with a seaside theme, and includes a custom mermaid tail bedspread. The van also includes a 'fish tank' shower and a built-in aquarium.",
       price: 90000,
       quantity: 6,
-      imageUrl: "https://cdn-icons-png.flaticon.com/512/7057/7057942.png",
+      imageUrl:
+        "https://live.staticflickr.com/8310/8073072792_46a83f91ed_b.jpg",
     }),
     Products.create({
       name: "Aladdin Van",
@@ -364,44 +406,48 @@ async function seed() {
       imageUrl: "https://pbs.twimg.com/media/D3KHbo4W4AA3H3s.jpg:large",
     }),
     Products.create({
-      name: "Beauty and the Beast Van",
+      name: "Beauty and the Beast Bus",
       description:
         "Experience the magic of 'Beauty and the Beast' in this van! The interior features a library theme, with shelves of books and a custom stained glass window. The van also includes a 'beast's lair' sleeping area and a built-in rose garden.",
-      price: 95000,
+      price: 200000,
       quantity: 7,
-      imageUrl: "https://cdn-icons-png.flaticon.com/512/7057/7057942.png",
+      imageUrl: "https://pbs.twimg.com/media/DpyryV7WwAAWQaW.jpg:large",
     }),
     Products.create({
-      name: "Lion King Van",
+      name: "Lion King Bus",
       description:
         "Hakuna matata in this 'Lion King' inspired van! The van is decorated with an African savannah theme and features custom lion king artwork. The van also includes a built-in 'pride rock' sleeping area and a rooftop deck for stargazing.",
       price: 80000,
       quantity: 4,
-      imageUrl: "https://cdn-icons-png.flaticon.com/512/7057/7057942.png",
+      imageUrl:
+        "https://images.squarespace-cdn.com/content/v1/5be72eea2714e5ddca521530/1632765711327-TSDUMW6FYY5CCF3C591P/Bus+Wrap_Lion+King_Drivers+Side_Full_NYPL_HQ.jpg",
     }),
     Products.create({
-      name: "Peter Pan Van",
+      name: "Peter Pan Bus",
       description:
         "Never grow up in this 'Peter Pan' inspired van! The interior features a 'neverland' theme, with a custom pirate ship bed and a built-in 'mermaid lagoon' shower. The van also includes a built-in trampoline and a rooftop deck for stargazing.",
       price: 90000,
       quantity: 6,
-      imageUrl: "https://cdn-icons-png.flaticon.com/512/7057/7057942.png",
+      imageUrl:
+        "https://mickeyblog.com/wp-content/uploads/2019/11/Peter-Pan-Bus.jpg",
     }),
     Products.create({
-      name: "Mickey Mouse Van",
+      name: "Minnie Mouse Van",
       description:
-        "Get in the Disney spirit with this 'Mickey Mouse' inspired van! The interior features classic black and white decor and custom Mickey Mouse artwork. The van also includes a built-in theater screen for movie nights and a rooftop deck for stargazing.",
+        "Get in the Disney spirit with this 'Minnie Mouse' inspired van! The interior features classic black and white decor and custom Minnie Mouse artwork. The van also includes a built-in theater screen for movie nights and a rooftop deck for stargazing.",
       price: 75000,
       quantity: 3,
-      imageUrl: "https://cdn-icons-png.flaticon.com/512/7057/7057942.png",
+      imageUrl:
+        "https://thenewswheel.com/wp-content/uploads/2017/07/Minnie-Van.png",
     }),
     Products.create({
-      name: "Sleeping Beauty Van",
+      name: "Barbie Van",
       description:
-        "Experience true Disney magic in this 'Sleeping Beauty' inspired van! The van is decorated with a fairytale theme and includes a custom princess bedspread. The van also includes a built-in rose garden and a rooftop deck for stargazing.",
+        "Experience true magic in this 'Barbie' inspired van! The van is decorated with a fairytale theme and includes a custom princess bedspread. The van also includes a built-in rose garden and a rooftop deck for stargazing.",
       price: 95000,
       quantity: 7,
-      imageUrl: "https://cdn-icons-png.flaticon.com/512/7057/7057942.png",
+      imageUrl:
+        "https://www.travelandleisure.com/thmb/awZ1xH3fVwMZbOsp0Yyr-iiJjyA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/exterior-barbie-camper-rvshare-BARBIERV0422-83300721b8a74c9e91d0ac2af788b9c8.jpg",
     }),
     Products.create({
       name: "Toy Collector Van",
@@ -409,7 +455,8 @@ async function seed() {
         "Take your toy collection on the road with this van inspired by Toy Story! The interior is designed to store all your favorite toys and comes with a comfortable sleeping area. It also has a built-in mini movie theater, perfect for watching Toy Story on the go.",
       price: 100000,
       quantity: 10,
-      imageUrl: "https://cdn-icons-png.flaticon.com/512/7057/7057942.png",
+      imageUrl:
+        "https://www.lichtsinn.com/blog/wp-content/uploads/sites/60/2019/06/IMG_2655.jpg",
     }),
     Products.create({
       name: "Emotion Van",
@@ -430,20 +477,20 @@ async function seed() {
         "https://thepizzapost.co.uk/blog/wp-content/uploads/2022/01/49260C80-0E7B-4CDA-9C6B-4C0870B27BC3-scaled.jpg",
     }),
     Products.create({
-      name: "Ratatouille Van",
+      name: "Ratatouille Bus",
       description:
         "Cook up a storm with this van inspired by Ratatouille! The interior is designed with a French-inspired theme and comes with a comfortable sleeping area. It also has a built-in kitchenette to make delicious meals inspired by the movie.",
       price: 95000,
       quantity: 4,
-      imageUrl: "https://cdn-icons-png.flaticon.com/512/7057/7057942.png",
+      imageUrl: "https://pbs.twimg.com/media/Eqkg2i9XUAIVgTm.jpg",
     }),
     Products.create({
-      name: "Monsters Van",
+      name: "Monsters Bus",
       description:
         "Get ready for a scare with this van inspired by Monsters Inc.! The interior is designed with a monster theme and comes with a comfortable sleeping area. It also has a built-in entertainment system to watch your favorite monster movies.",
       price: 105000,
       quantity: 8,
-      imageUrl: "https://cdn-icons-png.flaticon.com/512/7057/7057942.png",
+      imageUrl: "http://marketingmag.ca/wp-content/uploads/2013/06/image1.jpeg",
     }),
     Products.create({
       name: "Stranger Things Van",
@@ -451,7 +498,8 @@ async function seed() {
         "This van is perfect for fans of the hit show Stranger Things. It comes equipped with all the necessary equipment for ghost hunting and is perfect for camping out in the Upside Down.",
       price: 120000,
       quantity: 2,
-      imageUrl: "https://cdn-icons-png.flaticon.com/512/7057/7057942.png",
+      imageUrl:
+        "https://i2-prod.cambridge-news.co.uk/incoming/article16583002.ece/ALTERNATES/s1200c/0_WhatsApp-Image-2019-07-14-at-31831-PMjpeg.jpg",
     }),
     Products.create({
       name: "Fitness Van",
@@ -459,7 +507,8 @@ async function seed() {
         "Get fit on the go with this fully equipped gym on wheels! The interior includes a weight lifting station, yoga mat, and treadmill. It also has a small kitchenette to make post-workout smoothies.",
       price: 85000,
       quantity: 4,
-      imageUrl: "https://cdn-icons-png.flaticon.com/512/7057/7057942.png",
+      imageUrl:
+        "https://i0.wp.com/thevantasticlife.com/wp-content/uploads/2021/02/IMG_4548-scaled.jpg?resize=780%2C400&ssl=1",
     }),
     Products.create({
       name: "Texas Van",
@@ -485,7 +534,8 @@ async function seed() {
         "This van is perfect for fans of NoBull footwear! The interior is decked out in NoBull gear and includes a sleeping area and a mini gym complete with a weight lifting station and yoga mats.",
       price: 90000,
       quantity: 7,
-      imageUrl: "https://cdn-icons-png.flaticon.com/512/7057/7057942.png",
+      imageUrl:
+        "https://www.motorbiscuit.com/wp-content/uploads/2017/08/XV-HD-Announcement-Photo-2-scaled-1.jpeg?w=1200",
     }),
     Products.create({
       name: "Gym Shark Van",
@@ -519,16 +569,16 @@ async function seed() {
  The `seed` function is concerned only with modifying the database.
 */
 async function runSeed() {
-  console.log('seeding...')
+  console.log("seeding...");
   try {
-    await seed()
+    await seed();
   } catch (err) {
-    console.error(err)
-    process.exitCode = 1
+    console.error(err);
+    process.exitCode = 1;
   } finally {
-    console.log('closing db connection')
-    await db.close()
-    console.log('db connection closed')
+    console.log("closing db connection");
+    await db.close();
+    console.log("db connection closed");
   }
 }
 
@@ -538,8 +588,8 @@ async function runSeed() {
   any errors that might occur inside of `seed`.
 */
 if (module === require.main) {
-  runSeed()
+  runSeed();
 }
 
 // we export the seed function for testing purposes (see `./seed.spec.js`)
-module.exports = seed
+module.exports = seed;

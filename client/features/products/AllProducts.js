@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchProductsAsync, selectAllProducts } from './AllProductsSlice';
-import { addOrder } from '../dataSlice';
-import { Link } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchProductsAsync, selectAllProducts } from "./AllProductsSlice";
+import { addOrder } from "../dataSlice";
+import { Link } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 
 const AllProducts = () => {
   const dispatch = useDispatch();
@@ -16,11 +16,11 @@ const AllProducts = () => {
     dispatch(fetchProductsAsync());
   }, [dispatch]);
 
-  if (status === 'loading') {
+  if (status === "loading") {
     return <div>Loading...</div>;
   }
 
-  if (status === 'failed') {
+  if (status === "failed") {
     return <div>{error}</div>;
   }
 
@@ -31,15 +31,15 @@ const AllProducts = () => {
   const handleAddToCart = (id, name, price, userId) => {
     if (isLoggedIn) {
       const product = { id, name, price };
-      fetch('/api/orders', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      fetch("/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           userId,
           product: JSON.stringify(product),
           quantity: 1,
-          id: uuidv4()
-        })
+          id: uuidv4(),
+        }),
       })
         .then((response) => response.json())
         .then((data) => {
@@ -47,14 +47,22 @@ const AllProducts = () => {
         })
         .catch((error) => console.error(error));
     } else {
-      const order = { id: uuidv4(), productName: name, productPrice: price, quantity: 1 };
-      const existingOrders = JSON.parse(localStorage.getItem('orders')) || [];
-      localStorage.setItem('orders', JSON.stringify([...existingOrders, order]));
+      const order = {
+        id: uuidv4(),
+        productName: name,
+        productPrice: price,
+        quantity: 1,
+      };
+      const existingOrders = JSON.parse(localStorage.getItem("orders")) || [];
+      localStorage.setItem(
+        "orders",
+        JSON.stringify([...existingOrders, order])
+      );
     }
   };
 
   return (
-    <div>
+    <div className="productcard">
       <h1>{username ? `Shopping as:  ${username}` : "Viewing as Guest"}</h1>
       <h1>All Products</h1>
       {products.map((product) => (
@@ -65,7 +73,12 @@ const AllProducts = () => {
             <p>Price: ${product.price}</p>
           </Link>
           {isLoggedIn && (
-            <button onClick={() => handleAddToCart(product.id, product.name, product.price, userId)}>
+            <button
+              className="button"
+              onClick={() =>
+                handleAddToCart(product.id, product.name, product.price, userId)
+              }
+            >
               Add to Cart
             </button>
           )}
