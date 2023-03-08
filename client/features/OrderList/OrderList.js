@@ -78,26 +78,25 @@ const OrderList = () => {
       });
       const newOrders = orders.filter((order) => order.id !== orderId);
       setOrders(newOrders);
-      // fetchOrders();
+      fetchOrders();
     } catch (error) {
       console.error(error);
     }
   };
 
-  const handleCheckout = async () => {
+  const handleDeleteAll = async () => {
     try {
-      await fetch(`/api/orders/checkout/${loggedInUserId}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(orders),
+      await fetch(`/api/orders/${loggedInUserId}`, {
+        method: 'DELETE',
       });
       setOrders([]);
+      fetchOrders();
     } catch (error) {
       console.error(error);
     }
   };
+  
+  
 
   useEffect(() => {
     let total = 0;
@@ -125,12 +124,14 @@ const OrderList = () => {
           <div>Total Price: ${totalPrice}</div>
           {loggedInUserId && (
             <>
-              <Checkout 
-              name="My Online Store"
-              description="Order Payment"
-              amount={totalPrice * 100}
-              handleCheckoutSuccess={fetchOrders}
-            />
+<Checkout 
+  name="My Online Store"
+  description="Order Payment"
+  amount={totalPrice * 100}
+  handleCheckoutSuccess={fetchOrders}
+  handleDeleteAll={handleDeleteAll}
+/>
+
             </>
           )}
         </>

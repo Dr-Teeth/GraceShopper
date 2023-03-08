@@ -29,9 +29,9 @@ const Navbar = () => {
 
   return (
     <div className="navbar">
-      <Link to="/home">
-        <h1> OnlyVans</h1>
-      </Link>
+<Link to="/home">
+  <img src= "/Imgs/OnlyVans.png"  />
+</Link>
       <nav className="right">
         {isLoggedIn ? (
           <div>
