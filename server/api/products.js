@@ -16,14 +16,7 @@ router.get("/", async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
   try {
     const product = await Products.findByPk(req.params.id, {
-      attributes: [
-        "id",
-        "name",
-        "description",
-        "price",
-        "quantity",
-        "imageUrl",
-      ],
+      attributes: ['id', 'name', 'description', 'price', 'quantity', 'imageUrl'],
     });
     if (product) {
       res.status(200).json(product);

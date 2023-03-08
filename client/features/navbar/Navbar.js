@@ -15,6 +15,9 @@ const Navbar = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const auth = useSelector((state) => state.auth);
   const isAdmin = useSelector((state) => state.auth.me.isAdmin);
+  const orders = useSelector((state) => state.data.orders);
+  const loggedInUserId = useSelector((state) => state.auth.me.id);
+  const totalQuantity = getTotalQuantity(orders, loggedInUserId);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -39,7 +42,7 @@ const Navbar = () => {
               Logout
             </button>
             <Button onClick={handleShow}>
-              Cart 0 Items
+              Cart {totalQuantity} Item{totalQuantity === 1 ? "" : "s"}
             </Button>
             <Modal show={show} onHide={handleClose} className="cart">
               <Modal.Header closeButton>

@@ -104,6 +104,10 @@ nav a {
   margin: 1em;
 }
 
+.productImg {
+  width: 500px;
+}
+
 form div {
   margin: 1em;
   display: inline-block;

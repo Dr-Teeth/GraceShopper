@@ -69,11 +69,7 @@ const AllProducts = () => {
         <div key={product.id}>
           <Link to={`/vans/${product.id}`}>
             <h2>{product.name}</h2>
-            <img
-              src={product.imageUrl}
-              alt={product.name}
-              className="productImg"
-            />
+            <img src={product.imageUrl} alt={product.name} className="productImg" />
             <p>Price: ${product.price}</p>
           </Link>
           {isLoggedIn && (
