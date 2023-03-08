@@ -16,7 +16,7 @@ const successPayment = data => {
   history.push('/thankyou')
 }
 
-const onToken = async (amount, description, handleCheckoutSuccess, token) => {
+const onToken = async (amount, description, handleCheckoutSuccess, handleDeleteAll, token) => {
   try {
     const { data } = await axios.post('/stripe/checkout', {
       description,
@@ -26,13 +26,13 @@ const onToken = async (amount, description, handleCheckoutSuccess, token) => {
     })
     successPayment(data)
     handleCheckoutSuccess()
+    handleDeleteAll()
   } catch (error) {
     errorPayment(error)
   }
 }
 
-const Checkout = ({name, description, amount, handleCheckoutSuccess}) => {
-
+const Checkout = ({name, description, amount, handleCheckoutSuccess, handleDeleteAll}) => {
   useEffect(() => {
     const unlisten = history.listen(() => {
       window.location.reload();
@@ -41,21 +41,22 @@ const Checkout = ({name, description, amount, handleCheckoutSuccess}) => {
       unlisten();
     };
   }, [history]);
-  
+
   return (
     <div className='cart'>
       <StripeCheckout
         name={name}
         description={description}
         amount={amount}
-        token={token => onToken(amount, description, handleCheckoutSuccess, token)}
+        token={token => onToken(amount, description, handleCheckoutSuccess, handleDeleteAll, token)}
         currency={CURRENCY}
         stripeKey="pk_test_51MigRUES3iKSqq49RCFL9Zqm6dCpUSQFDZYwJyqGG1JqHXperqIXBtNq3XRGbPnxmcebq0vqxSg7PtLTZR8FDAbf00kIqNKWZm"
         label="Pay with 💳"
       />
-    <img src={badge} />
+      <img src={badge} />
     </div>
   )
 }
+
 
 export default Checkout;
