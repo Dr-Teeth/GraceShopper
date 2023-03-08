@@ -1,3 +1,20 @@
+/* General Font */
+* {
+  font-family: myFirstFont;
+}
+
+@font-face {
+  font-family: myFirstFont;
+  src: url(sansation_light.woff);
+}
+
+@font-face {
+  font-family: myFirstFont;
+  src: url(sansation_bold.woff);
+  font-weight: bold;
+}
+
+/* Body */
 body {
   padding: 0;
   top: 0;
@@ -9,11 +26,6 @@ body {
   box-sizing: border-box;
 }
 
-/* .poop {
-  position: relative;
-  height: 100%;
-} */
-
 a {
   text-decoration: none !important;
 }
@@ -24,7 +36,7 @@ a {
   line-height: 1.5em;
 }
 
-/* Welcome Name */
+/* Welcome */
 h3 {
   color: rgb(0, 93, 139);
   font-family: cursive;
@@ -33,7 +45,15 @@ h3 {
   font-weight: bolder;
 }
 
-/* Welcome Name */
+/* .user {
+  color: rgb(0, 93, 139);
+  font-family: cursive;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bolder;
+} */
+
+/* h2 */
 h2 {
   color: rgb(0, 93, 139);
   font-family: cursive;
@@ -59,7 +79,72 @@ h2 {
   border-radius: 15px;
 }
 
+.ourProducts {
+  font-size: 72px;
+  background: -webkit-linear-gradient(#eee, #333);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 /* Single Products */
+.singleP {
+  display: grid;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 60px;
+  border-bottom: 2px, solid, black;
+  text-decoration: none;
+}
+
+.singleProduct {
+  display: grid;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 60px;
+  border-bottom: 2px, solid, black;
+  text-decoration: none;
+}
+
+.pdesc {
+  font-size: 20px;
+}
+
+.pprice {
+  font-size: 20px;
+}
+
+.singleAdd {
+  background-color: #272626;
+  box-shadow: 0 8px 16px 0 rgba(118, 119, 111, 0.843),
+    0 6px 20px 0 rgba(118, 119, 111, 0.843);
+  border-radius: 8px;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.singleAdd:hover {
+  background-color: #b50303;
+  color: rgb(255, 253, 253);
+}
+
+/* img.singleProduct {
+  display: grid;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 60px;
+  border-bottom: 2px, solid, black;
+  text-decoration: none;
+} */
 
 /* Vans Shown in Admin Dashboard */
 .productsadm {
@@ -67,8 +152,8 @@ h2 {
   border-radius: 15px;
 }
 
-/* Button */
-.button {
+/* AddToCart Button */
+.AddToCart {
   background-color: #272626;
   box-shadow: 0 8px 16px 0 rgba(118, 119, 111, 0.843),
     0 6px 20px 0 rgba(118, 119, 111, 0.843);
@@ -82,7 +167,72 @@ h2 {
   font-weight: bold;
 }
 
-.button:hover {
+.AddToCart:hover {
+  background-color: #b50303;
+  color: rgb(255, 253, 253);
+}
+
+/* Input Fields */
+input[type="text"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  background-color: rgb(117, 190, 227);
+  color: white;
+}
+
+input[type="number"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  background-color: rgb(117, 190, 227);
+  color: white;
+}
+
+input[type="submit"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  background-color: rgb(117, 190, 227);
+  color: white;
+}
+
+/* AddProAdmin*/
+.AddProAdmin {
+  display: grid;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 60px;
+  border-bottom: 2px, solid, black;
+  text-decoration: none;
+  font-weight: bold;
+  gap: 20px;
+}
+
+/* SaveChanges Button */
+.saveChanges {
+  background-color: #272626;
+  box-shadow: 0 8px 16px 0 rgba(118, 119, 111, 0.843),
+    0 6px 20px 0 rgba(118, 119, 111, 0.843);
+  border-radius: 8px;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.saveChanges {
   background-color: #b50303;
   color: rgb(255, 253, 253);
 }
