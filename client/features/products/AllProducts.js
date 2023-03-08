@@ -63,18 +63,24 @@ const AllProducts = () => {
 
   return (
     <div className="productcard">
-      <h1>{username ? `Shopping as:  ${username}` : "Viewing as Guest"}</h1>
-      <h1>All Products</h1>
+      <h1 className="user">
+        {username ? `Shopping as:  ${username}` : "Viewing as Guest"}
+      </h1>
+      <h1 className="ourProducts">Our Products</h1>
       {products.map((product) => (
         <div key={product.id}>
           <Link to={`/vans/${product.id}`}>
             <h2>{product.name}</h2>
-            <img src={product.imageUrl} alt={product.name} className="productImg" />
+            <img
+              src={product.imageUrl}
+              alt={product.name}
+              className="productImg"
+            />
             <p>Price: ${product.price}</p>
           </Link>
           {isLoggedIn && (
             <button
-              className="button"
+              className="AddToCart"
               onClick={() =>
                 handleAddToCart(product.id, product.name, product.price, userId)
               }

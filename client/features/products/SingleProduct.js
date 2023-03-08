@@ -15,9 +15,9 @@ const SingleProduct = () => {
   const handleAddToCart = (id, name, price, userId, imageUrl) => {
     if (isLoggedIn) {
       const product = { id, name, price, imageUrl };
-      fetch('/api/orders', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      fetch("/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           userId,
           product: JSON.stringify(product),
@@ -48,16 +48,30 @@ const SingleProduct = () => {
       {product && (
         <>
           <h3>{product.name}</h3>
-          <img src={product.imageUrl} alt={product.name}  />
-          <p>{product.description}</p>
-          <p>${product.price}</p>
+          <img
+            src={product.imageUrl}
+            alt={product.name}
+            className="productImg"
+          />
+          <p className="pdesc">{product.description}</p>
+          <p className="pprice">${product.price}</p>
           {isLoggedIn && (
-            <button onClick={() => handleAddToCart(product.id, product.name, product.price, userId, product.imageUrl)}>
-  Add to Cart
-</button>
-
-          )}        </>
-
+            <button
+              className="singleAdd"
+              onClick={() =>
+                handleAddToCart(
+                  product.id,
+                  product.name,
+                  product.price,
+                  userId,
+                  product.imageUrl
+                )
+              }
+            >
+              Add to Cart
+            </button>
+          )}{" "}
+        </>
       )}
     </div>
   );

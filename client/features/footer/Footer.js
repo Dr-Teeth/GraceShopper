@@ -74,15 +74,9 @@ const Footer = () => {
               <a href="https://www.pinterest.com/">
                 <i className="fa fa-pinterest"></i>
               </a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="copy-right">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <p>&copy; Vanity Vans</p>
+              <div className="col-md-12">
+                <p>&copy; OnlyVans</p>
+              </div>
             </div>
           </div>
         </div>

@@ -30,7 +30,7 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <Link to="/home">
-        <h1>Vanity Vans</h1>
+        <h1> OnlyVans</h1>
       </Link>
       <nav className="right">
         {isLoggedIn ? (

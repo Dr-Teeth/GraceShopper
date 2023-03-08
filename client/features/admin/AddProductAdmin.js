@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { addProductAsync } from '../products/AllProductsSlice';
+import React, { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addProductAsync } from "../products/AllProductsSlice";
 
 const AddProductAdmin = () => {
   const [name, editName] = useState("");
@@ -16,57 +16,73 @@ const AddProductAdmin = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addProductAsync({ id, name, description, price, quantity, imageUrl }));
+    dispatch(
+      addProductAsync({ id, name, description, price, quantity, imageUrl })
+    );
     navigate(`/dashboard`);
   };
 
   return (
-    <div>
+    <div className="AddProAdmin">
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">Product Name: </label>
-          <input
+        <input
+          type="text"
           name="name"
-          placeholder='Name goes here'
+          placeholder="Name goes here"
           value={name}
           onChange={(e) => editName(e.target.value)}
         />
 
-        <label htmlFor="description">Description: </label>
+        <label htmlFor="description">description</label>
         <input
+          type="text"
           name="description"
-          placeholder='Description...'
+          placeholder="Description..."
           value={description}
           onChange={(e) => editDescription(e.target.value)}
         />
 
         <label htmlFor="price">Unit Price: </label>
         <input
+          type="number"
           name="price"
-          placeholder='0 - 999999'
+          placeholder="0 - 999999"
           value={price}
           onChange={(e) => editPrice(e.target.value)}
         />
 
         <label htmlFor="quantity">Quantity: </label>
         <input
+          type="number"
           name="quantity"
-          placeholder='0'
+          placeholder="0"
           value={quantity}
           onChange={(e) => editQuantity(e.target.value)}
         />
 
         <label htmlFor="imageUrl">Image URL: </label>
         <input
+          type="imageUrl"
           name="imageUrl"
-          placeholder='www.imageurl.com'
+          placeholder="www.imageurl.com"
           value={imageUrl}
           onChange={(e) => editImageUrl(e.target.value)}
         />
-        <button type='submit' disabled={!name && !description && !price && !quantity && !imageUrl ? true : false}>Save Changes</button>
+        <button
+          className="saveChanges"
+          type="submit"
+          disabled={
+            !name && !description && !price && !quantity && !imageUrl
+              ? true
+              : false
+          }
+        >
+          Save Changes
+        </button>
       </form>
     </div>
-  )
-}
+  );
+};
 
 export default AddProductAdmin;
-
