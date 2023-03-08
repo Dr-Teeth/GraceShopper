@@ -6,7 +6,8 @@
   color: #fff;
   padding: 10px 20px;
   font-family: 'Montserrat', sans-serif;
-  position: fixed;
+  position: fixed !important;
+  width: 100%;
   top: 0;
   left: 0;
   right: 0;
@@ -24,9 +25,18 @@
   margin-left: auto;
 }
 
+.modal-header .modal-title {
+  text-align: center;
+}
+
 .navbar div {
   display: flex;
   align-items: center;
+}
+
+.navbar img {
+  height: 100px;
+  margin-left: 20px;
 }
 
 .navbar a {
