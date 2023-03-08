@@ -173,27 +173,7 @@ h2 {
 }
 
 /* Input Fields */
-input[type="text"] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  box-sizing: border-box;
-  border: none;
-  background-color: rgb(117, 190, 227);
-  color: white;
-}
-
-input[type="number"] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  box-sizing: border-box;
-  border: none;
-  background-color: rgb(117, 190, 227);
-  color: white;
-}
-
-input[type="submit"] {
+input {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
