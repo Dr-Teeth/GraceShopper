@@ -30,7 +30,7 @@ const Navbar = () => {
   return (
     <div className="navbar">
 <Link to="/home">
-  <img src= "/Imgs/OnlyVans.png"  />
+ <h1>vanity vans</h1>
 </Link>
       <nav className="right">
         {isLoggedIn ? (
