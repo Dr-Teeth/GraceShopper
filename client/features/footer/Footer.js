@@ -75,7 +75,7 @@ const Footer = () => {
                 <i className="fa fa-pinterest"></i>
               </a>
               <div className="col-md-12">
-                <p>&copy; OnlyVans</p>
+                <p>&copy; vanityvans</p>
               </div>
             </div>
           </div>
